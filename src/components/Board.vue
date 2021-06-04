@@ -72,7 +72,7 @@ export default {
     })
     .on('drop', (el, wrapper, target, siblings) => {
       const targetList = {
-        id: el.children[0].dataset.listId * 1,
+        id: el.children[0].dataset.listId,
         pos: 65535
       }
       let prevList = null
@@ -81,18 +81,18 @@ export default {
       Array.from(wrapper.querySelectorAll('.list'))
         .forEach((el, idx, arr) => {
           const listId = null
-          const listFound = targetList.id === (el.dataset.listId * 1)
+          const listFound = targetList.id === (el.dataset.listId)
 
           if (!listFound) return 
 
           prevList = idx > 0 ? {
-            id: arr[idx - 1].dataset.listId * 1,
-            pos: arr[idx - 1].dataset.listPos * 1,
+            id: arr[idx - 1].dataset.listId,
+            pos: arr[idx - 1].dataset.listPos,
           } : null
 
           nextList = idx < arr.length - 1 ? {
-            id: arr[idx + 1].dataset.listId * 1,
-            pos: arr[idx + 1].dataset.listPos * 1,
+            id: arr[idx + 1].dataset.listId,
+            pos: arr[idx + 1].dataset.listPos,
           } : null
         })
 
@@ -106,8 +106,8 @@ export default {
     this.drake = dragula([...this.$el.querySelectorAll('.card-list')])
     .on('drop', (el, wrapper, target, silblings) => {
       const targetCard = {
-        id: el.dataset.cardId * 1, 
-        listId: wrapper.dataset.listId * 1,
+        id: el.dataset.cardId, 
+        listId: wrapper.dataset.listId,
         pos: 65535,
       }
       let prevCard = null
@@ -115,16 +115,16 @@ export default {
 
       Array.from(wrapper.querySelectorAll('.card-item'))
         .forEach((el, idx, arr) => {
-          const cardId = el.dataset.cardId * 1
+          const cardId = el.dataset.cardId
 
           if (targetCard.id === cardId) {
             prevCard = idx > 0 ? {
-              id: arr[idx - 1].dataset.cardId * 1,
-              pos: arr[idx - 1].dataset.cardPos * 1,
+              id: arr[idx - 1].dataset.cardId,
+              pos: arr[idx - 1].dataset.cardPos,
             } : null
             nextCard = idx < arr.length - 1 ? {
-              id: arr[idx + 1].dataset.cardId * 1,
-              pos: arr[idx + 1].dataset.cardPos * 1,
+              id: arr[idx + 1].dataset.cardId,
+              pos: arr[idx + 1].dataset.cardPos,
             } : null
           }
         })
