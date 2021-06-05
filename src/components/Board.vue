@@ -1,54 +1,37 @@
 <template>
-  <v-main>
-    <!-- <v-container></v-container>
-    <v-layout>
-      <v-flex>
-        <input
-          class="form-control"
-          v-if="isEditTitle"
-          type="text"
-          v-model="inputTitle"
-          ref="inputTitle"
-          @keyup.enter="onTitleSubmit"
-          @blur="onTitleSubmit"
-        />
-        <span
-          v-else
-          @click="onClickTitle"
-          class="board-header-btn board-title"
-          >{{ board.title }}</span
-        >
-      </v-flex>
-      <v-flex> </v-flex>
-      <v-flex>
-        <a
-          class="board-header-btn show-menu"
-          href=""
-          @click.prevent="onClickShowMenu"
-          >... Show Menu</a
-        ></v-flex
-      >
-      <v-flex>
-        <div class="board">
-          <div class="list-section-wrapper">
-            <div class="list-section">
-              <div
-                class="list-wrapper"
-                v-for="list in board.lists"
-                :key="list.pos"
-              >
-                <list :list="list"></list>
-              </div>
-              <div class="list-wrapper">
-                <add-list />
-              </div>
-            </div>
-          </div>
-          <board-settings v-if="isShowBoardMenu" />
-          <router-view :boardId="board.id"></router-view></div
-      ></v-flex>
-    </v-layout> -->
-  </v-main>
+  <v-app>
+    <v-main>
+      <v-container>
+        <v-row>
+          <v-col cols="12" sm="10">
+            <v-btn plain dark color="deep-purple" class="title-btn">
+              <input
+                class="board-title-form"
+                v-if="isEditTitle"
+                v-model="inputTitle"
+                ref="inputTitle"
+                @keyup.enter="onTitleSubmit"
+                @blur="onTitleSubmit"
+              />
+              <h2 v-else @click="onClickTitle">{{ board.title }}</h2>
+            </v-btn>
+            <v-row>
+              <v-col cols="3" v-for="list in board.lists" :key="list.pos">
+                <v-card> <list :list="list"></list> </v-card>
+              </v-col>
+              <v-col cols="3">
+                <v-card><add-list /></v-card>
+              </v-col>
+            </v-row>
+          </v-col>
+          <v-col cols="12" sm="2">
+            <board-settings v-if="isShowBoardMenu" />
+            <router-view :boardId="board.id"></router-view>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
@@ -184,7 +167,7 @@ export default {
       "UPDATE_CARD",
       "UPDATE_LIST"
     ]),
-    ...mapMutations(["SET_IS_SHOW_BOARD_MENU", "SET_THEME"]),
+    ...mapMutations(["SET_THEME"]),
     fetchData() {
       return this.FETCH_BOARD(this.$route.params.id);
     },
@@ -201,12 +184,31 @@ export default {
       if (title === this.board.title) return (this.isEditTitle = false);
 
       this.UPDATE_BOARD({ id, title }).then(_ => (this.isEditTitle = false));
-    },
-    onClickShowMenu() {
-      this.SET_IS_SHOW_BOARD_MENU(true);
     }
   }
 };
 </script>
 
-<style></style>
+<style>
+h2 {
+  font-size: 2rem;
+}
+
+.title-btn {
+  margin: 1rem 0 1rem 0;
+}
+
+.board-title-form {
+  width: 100%; /* 원하는 너비 설정 */
+  height: auto; /* 높이값 초기화 */
+  line-height: normal; /* line-height 초기화 */
+  font-size: 2rem;
+  padding: 0.1em 0.1em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
+  font-family: inherit; /* 폰트 상속 */
+  border-bottom: 1px solid;
+  outline-style: none; /* 포커스시 발생하는 효과 제거 */
+  -webkit-appearance: none; /* 브라우저별 기본 스타일링 제거 */
+  -moz-appearance: none;
+  appearance: none;
+}
+</style>

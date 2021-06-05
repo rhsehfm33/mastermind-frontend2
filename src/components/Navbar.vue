@@ -2,6 +2,7 @@
   <nav class="header">
     <v-app-bar color="deep-purple" dark>
       <v-btn @click.prevent="onClickCreateBoard">+ New Board</v-btn>
+      <v-btn @click.prevent="onClickShowMenu">Show Menu</v-btn>
       <v-spacer></v-spacer>
       <v-toolbar-title
         ><router-link to="/">{{ appTitle }}</router-link>
@@ -43,7 +44,7 @@ export default {
     this.updateTheme();
   },
   methods: {
-    ...mapMutations(["SET_IS_ADD_BOARD"]),
+    ...mapMutations(["SET_IS_ADD_BOARD", "SET_IS_SHOW_BOARD_MENU"]),
     updateTheme() {
       this.$el.style.backgroundColor = this.navbarColor;
       const body = document.querySelector("body");
@@ -56,6 +57,9 @@ export default {
     },
     onClickCreateBoard() {
       this.SET_IS_ADD_BOARD(true);
+    },
+    onClickShowMenu() {
+      this.SET_IS_SHOW_BOARD_MENU(true);
     }
   }
 };

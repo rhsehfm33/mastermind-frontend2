@@ -10,6 +10,7 @@
               </v-card>
             </router-link>
           </v-col>
+          <v-col cols="12" sm="2"> </v-col>
         </v-row>
         <AddBoard v-if="isAddBoard" />
       </v-container>

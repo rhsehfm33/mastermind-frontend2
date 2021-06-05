@@ -2,64 +2,77 @@
   <modal class="modal-card">
     <div slot="header" class="modal-card-header">
       <div class="modal-card-header-title">
-        <input class="form-control" type="text" :value="card.title" :readonly="!toggleTitle"
-          @click.prevent="toggleTitle=!toggleTitle" @blur="onBlurTitle"
-          ref="inputTitle">
+        <v-text-field
+          solo
+          :value="card.title"
+          :readonly="!toggleTitle"
+          @click.prevent="toggleTitle = !toggleTitle"
+          @blur="onBlurTitle"
+          ref="inputTitle"
+        />
       </div>
-      <a class="modal-close-btn" href="" @click.prevent="onClickClose">&times;</a>
+      <a class="modal-close-btn" href="" @click.prevent="onClickClose"
+        >&times;</a
+      >
     </div>
     <div slot="body">
       <h3>Description</h3>
-      <textarea  class="form-control" cols="30" rows="3" placeholder="Add a more detailed description..."
+      <textarea
+        cols="30"
+        rows="3"
+        placeholder="Add a more detailed description..."
         :readonly="!toggleDesc"
-        @click.prevent="toggleDesc=!toggleDesc" @blur="onBlurInputDesc" 
-        ref="inputDesc" v-model="card.description"></textarea>
+        @click.prevent="toggleDesc = !toggleDesc"
+        @blur="onBlurInputDesc"
+        ref="inputDesc"
+        v-model="card.description"
+      ></textarea>
     </div>
     <div slot="footer"></div>
-  </modal>  
+  </modal>
 </template>
 
 <script>
-import {card} from '../api'
-import Modal from './Modal.vue'
-import { mapState, mapMutations, mapActions } from 'vuex'
+import { card } from "../api";
+import Modal from "./Modal.vue";
+import { mapState, mapMutations, mapActions } from "vuex";
 
 export default {
   components: { Modal },
-  props: ['boardId'],
+  props: ["boardId"],
   data() {
     return {
       toggleTitle: false,
       toggleDesc: false
-    }
+    };
   },
   computed: {
     ...mapState({
-      card: 'card'
+      card: "card"
     })
   },
   created() {
-    this.FETCH_CARD(this.$route.params.cid)
+    this.FETCH_CARD(this.$route.params.cid);
   },
   methods: {
-    ...mapActions(['FETCH_CARD', 'UPDATE_CARD']),
+    ...mapActions(["FETCH_CARD", "UPDATE_CARD"]),
     onClickClose() {
-      this.$router.push(`/board/${this.boardId}`)
+      this.$router.push(`/board/${this.boardId}`);
     },
     onBlurTitle() {
-      this.toggleTitle = !this.toggleTitle
-      const title = this.$refs.inputTitle.value.trim()
-      if (!title) return 
-      this.UPDATE_CARD({id: this.card.id, title})
+      this.toggleTitle = !this.toggleTitle;
+      const title = this.$refs.inputTitle.value.trim();
+      if (!title) return;
+      this.UPDATE_CARD({ id: this.card.id, title });
     },
     onBlurInputDesc() {
-      this.toggleDesc = !this.toggleDesc
-      const description = this.$refs.inputDesc.value.trim()
-      if (!description) return 
-      this.UPDATE_CARD({id: this.card.id, description})
+      this.toggleDesc = !this.toggleDesc;
+      const description = this.$refs.inputDesc.value.trim();
+      if (!description) return;
+      this.UPDATE_CARD({ id: this.card.id, description });
     }
   }
-}
+};
 </script>
 
 <style>
@@ -69,7 +82,7 @@ export default {
   width: 60%;
 }
 .modal-card-header-title {
-  padding-right: 30px;  
+  padding-right: 30px;
 }
 .modal-close-btn {
   position: absolute;
@@ -82,4 +95,3 @@ export default {
   position: relative;
 }
 </style>
-

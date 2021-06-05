@@ -7,8 +7,8 @@ const state = {
   card: {},
   isAddBoard: false,
   isShowBoardMenu: false,
-  navbarColor: '#026aa7',
-  bodyColor: 'rgb(255,255,255)'
-}
+  navbarColor: "#026aa7",
+  bodyColor: "rgb(255,255,255)"
+};
 
-export default state
+export default state;

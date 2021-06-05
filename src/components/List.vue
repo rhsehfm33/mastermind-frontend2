@@ -1,19 +1,38 @@
 <template>
   <div class="list" :data-list-id="list.id" :data-list-pos="list.pos">
     <div class="list-header">
-      <input class="form-control input-title" v-if="isEditTitle" type="text" v-model="inputTitle" ref="inputTitle"
-        @keyup.enter="onTitleSubmit" @blur="onTitleSubmit">
-      <div v-else class="list-header-title" @click="onClickTitle">{{list.title}}</div>
-      <a class="delete-list-btn" href="" @click.prevent="onDeleteList">&times;</a>
+      <input
+        class=" input-title"
+        v-if="isEditTitle"
+        type="text"
+        v-model="inputTitle"
+        ref="inputTitle"
+        @keyup.enter="onTitleSubmit"
+        @blur="onTitleSubmit"
+      />
+      <div v-else class="list-header-title" @click="onClickTitle">
+        {{ list.title }}
+      </div>
+      <a class="delete-list-btn" href="" @click.prevent="onDeleteList"
+        >&times;</a
+      >
     </div>
-    
+
     <div class="card-list" :data-list-id="list.id">
-      <div  v-show="!list.cards.length" class="empty-card-item"></div>
-      <card-item v-for="card in list.cards" :key="`${list.id}-${card.pos}`" 
-        :card="card" :boardId="list.boardId"></card-item> 
+      <div v-show="!list.cards.length" class="empty-card-item"></div>
+      <card-item
+        v-for="card in list.cards"
+        :key="`${list.id}-${card.pos}`"
+        :card="card"
+        :boardId="list.boardId"
+      ></card-item>
     </div>
     <div v-if="isAddCard">
-      <add-card :pos="lastCardPos" :listId="list.id" @close="isAddCard = false"></add-card>      
+      <add-card
+        :pos="lastCardPos"
+        :listId="list.id"
+        @close="isAddCard = false"
+      ></add-card>
     </div>
     <a v-else class="add-card-btn" href="" @click.prevent="isAddCard = true">
       &plus; Add a card...
@@ -22,58 +41,54 @@
 </template>
 
 <script>
-import {card} from '../api'
-import CardItem from './CardItem.vue'
-import AddCard from './AddCard.vue'
-import { mapActions } from 'vuex'
+import { card } from "../api";
+import CardItem from "./CardItem.vue";
+import AddCard from "./AddCard.vue";
+import { mapActions } from "vuex";
 
 export default {
   components: { CardItem, AddCard },
-  props: ['list'],
+  props: ["list"],
   data() {
     return {
       isAddCard: false,
       isEditTitle: false,
-      inputTitle: ''
-    }
+      inputTitle: ""
+    };
   },
   created() {
-    this.inputTitle = this.list.title
+    this.inputTitle = this.list.title;
   },
   computed: {
     lastCardPos() {
-      const lastCard = this.list.cards[this.list.cards.length - 1]
-      let pos = 65535
-      if (lastCard) pos = lastCard.pos + pos
-      return pos
+      const lastCard = this.list.cards[this.list.cards.length - 1];
+      let pos = 65535;
+      if (lastCard) pos = lastCard.pos + pos;
+      return pos;
     }
   },
   methods: {
-    ...mapActions([
-      'UPDATE_LIST',
-      'DELETE_LIST'
-    ]),
+    ...mapActions(["UPDATE_LIST", "DELETE_LIST"]),
     onClickTitle() {
-      this.isEditTitle=true
-      this.$nextTick(_=> this.$refs.inputTitle.focus())
+      this.isEditTitle = true;
+      this.$nextTick(_ => this.$refs.inputTitle.focus());
     },
     onTitleSubmit() {
-      this.inputTitle = this.inputTitle.trim()
-      if (!this.inputTitle) return 
-      const id = this.list.id
-      const title = this.inputTitle
+      this.inputTitle = this.inputTitle.trim();
+      if (!this.inputTitle) return;
+      const id = this.list.id;
+      const title = this.inputTitle;
 
-      if (title === this.list.title) return this.isEditTitle = false
+      if (title === this.list.title) return (this.isEditTitle = false);
 
-      this.UPDATE_LIST({ id, title })
-        .then(_=> (this.isEditTitle = false))
+      this.UPDATE_LIST({ id, title }).then(_ => (this.isEditTitle = false));
     },
     onDeleteList() {
-      if (!confirm(`Delete ${this.list.title} list?`)) return 
-      this.DELETE_LIST({ id: this.list.id }) 
+      if (!confirm(`Delete ${this.list.title} list?`)) return;
+      this.DELETE_LIST({ id: this.list.id });
     }
   }
-}
+};
 </script>
 
 <style>
@@ -114,10 +129,10 @@ export default {
   flex: 1 1 auto;
   overflow-y: scroll;
 }
-.empty-card-item   {
+.empty-card-item {
   height: 10px;
   width: 100%;
-  background-color: rgba(0,0,0, 0);
+  background-color: rgba(0, 0, 0, 0);
 }
 .add-card-btn {
   flex: 0 0 auto;
@@ -128,6 +143,6 @@ export default {
 }
 .add-card-btn:focus,
 .add-card-btn:hover {
-  background-color: rgba(0,0,0, .1);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 </style>

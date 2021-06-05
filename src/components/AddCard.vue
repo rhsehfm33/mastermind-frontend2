@@ -1,43 +1,56 @@
 <template>
   <div class="add-card">
     <form @submit.prevent="onSubmitNewCard">
-      <input class="form-control" type="text" v-model="inputCardTitle" ref="inputCardTitle" @blur="$emit('close')">
-      <button class="btn" :class="{'btn-success': !invalidInput}" :disabled="invalidInput" @mousedown="onSubmitNewCard()">Add Card</button>
-      <a class="cancel-add-btn" href="" @click.prevent="$emit('close')">&times;</a>
+      <input
+        type="text"
+        v-model="inputCardTitle"
+        ref="inputCardTitle"
+        @blur="$emit('close')"
+      />
+      <button
+        class="btn"
+        :class="{ 'btn-success': !invalidInput }"
+        :disabled="invalidInput"
+        @mousedown="onSubmitNewCard()"
+      >
+        Add Card
+      </button>
+      <a class="cancel-add-btn" href="" @click.prevent="$emit('close')"
+        >&times;</a
+      >
     </form>
   </div>
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex'
+import { mapState, mapMutations, mapActions } from "vuex";
 
 export default {
-  props: [ 'pos', 'listId' ],
+  props: ["pos", "listId"],
   data() {
     return {
-      inputCardTitle: ''
-    }
+      inputCardTitle: ""
+    };
   },
   computed: {
     invalidInput() {
-      return !this.inputCardTitle.trim()
+      return !this.inputCardTitle.trim();
     }
   },
   mounted() {
-    this.$refs.inputCardTitle.focus()
+    this.$refs.inputCardTitle.focus();
   },
   methods: {
-    ...mapActions([
-      'ADD_CARD'
-    ]),
+    ...mapActions(["ADD_CARD"]),
     onSubmitNewCard() {
-      if (this.invalidInput) return 
-      const {inputCardTitle, pos, listId} = this
-      this.ADD_CARD({title: inputCardTitle, pos, listId})
-        .finally(_=> this.inputCardTitle = '')
-    },
+      if (this.invalidInput) return;
+      const { inputCardTitle, pos, listId } = this;
+      this.ADD_CARD({ title: inputCardTitle, pos, listId }).finally(
+        _ => (this.inputCardTitle = "")
+      );
+    }
   }
-}
+};
 </script>
 
 <style>

@@ -25,4 +25,8 @@ export default {
 .router-link {
   text-decoration: none;
 }
+
+a {
+  text-decoration: none;
+}
 </style>
