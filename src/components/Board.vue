@@ -1,49 +1,54 @@
 <template>
-  <div>
-    <div class="board-wrapper">
-      <div class="board">
-        <div class="board-header">
-          <input
-            class="form-control"
-            v-if="isEditTitle"
-            type="text"
-            v-model="inputTitle"
-            ref="inputTitle"
-            @keyup.enter="onTitleSubmit"
-            @blur="onTitleSubmit"
-          />
-          <span
-            v-else
-            @click="onClickTitle"
-            class="board-header-btn board-title"
-            >{{ board.title }}</span
-          >
-          <a
-            class="board-header-btn show-menu"
-            href=""
-            @click.prevent="onClickShowMenu"
-            >... Show Menu</a
-          >
-        </div>
-        <div class="list-section-wrapper">
-          <div class="list-section">
-            <div
-              class="list-wrapper"
-              v-for="list in board.lists"
-              :key="list.pos"
-            >
-              <list :list="list"></list>
-            </div>
-            <div class="list-wrapper">
-              <add-list />
+  <v-main>
+    <!-- <v-container></v-container>
+    <v-layout>
+      <v-flex>
+        <input
+          class="form-control"
+          v-if="isEditTitle"
+          type="text"
+          v-model="inputTitle"
+          ref="inputTitle"
+          @keyup.enter="onTitleSubmit"
+          @blur="onTitleSubmit"
+        />
+        <span
+          v-else
+          @click="onClickTitle"
+          class="board-header-btn board-title"
+          >{{ board.title }}</span
+        >
+      </v-flex>
+      <v-flex> </v-flex>
+      <v-flex>
+        <a
+          class="board-header-btn show-menu"
+          href=""
+          @click.prevent="onClickShowMenu"
+          >... Show Menu</a
+        ></v-flex
+      >
+      <v-flex>
+        <div class="board">
+          <div class="list-section-wrapper">
+            <div class="list-section">
+              <div
+                class="list-wrapper"
+                v-for="list in board.lists"
+                :key="list.pos"
+              >
+                <list :list="list"></list>
+              </div>
+              <div class="list-wrapper">
+                <add-list />
+              </div>
             </div>
           </div>
-        </div>
-        <board-settings v-if="isShowBoardMenu" />
-        <router-view :boardId="board.id"></router-view>
-      </div>
-    </div>
-  </div>
+          <board-settings v-if="isShowBoardMenu" />
+          <router-view :boardId="board.id"></router-view></div
+      ></v-flex>
+    </v-layout> -->
+  </v-main>
 </template>
 
 <script>

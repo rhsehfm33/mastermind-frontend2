@@ -20,6 +20,7 @@
                 ></v-text-field>
                 <v-btn
                   block
+                  class="white--text"
                   color="deep-purple"
                   type="submit"
                   :disabled="invalidForm"
