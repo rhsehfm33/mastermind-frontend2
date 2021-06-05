@@ -2,7 +2,7 @@
   <div class="add-card">
     <form @submit.prevent="onSubmitNewCard">
       <input class="form-control" type="text" v-model="inputCardTitle" ref="inputCardTitle" @blur="$emit('close')">
-      <button class="btn btn-success" type="submit" :disabled="invalidInput">Add Card</button>
+      <button class="btn" :class="{'btn-success': !invalidInput}" :disabled="invalidInput" @mousedown="onSubmitNewCard()">Add Card</button>
       <a class="cancel-add-btn" href="" @click.prevent="$emit('close')">&times;</a>
     </form>
   </div>
