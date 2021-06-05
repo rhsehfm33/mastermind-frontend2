@@ -1,25 +1,32 @@
 <template>
-  <div class="add-card">
-    <form @submit.prevent="onSubmitNewCard">
-      <input
-        type="text"
-        v-model="inputCardTitle"
-        ref="inputCardTitle"
-        @blur="$emit('close')"
-      />
-      <button
-        class="btn"
-        :class="{ 'btn-success': !invalidInput }"
-        :disabled="invalidInput"
-        @mousedown="onSubmitNewCard()"
-      >
-        Add Card
-      </button>
-      <a class="cancel-add-btn" href="" @click.prevent="$emit('close')"
-        >&times;</a
-      >
-    </form>
-  </div>
+  <v-card class="add-card">
+    <div class="title-wrapper">
+      <h5>
+        New Card
+        <a href="" class="modal-close" @click.prevent="SET_IS_ADD_BOARD(false)"
+          >&times;
+        </a>
+      </h5>
+    </div>
+    <v-form @submit.prevent="onSubmitNewCard">
+      <div class="form-box">
+        <v-text-field
+          type="text"
+          v-model="inputCardTitle"
+          ref="inputCardTitle"
+          @blur="$emit('close')"
+        />
+        <v-btn
+          color="deep-purple"
+          class="white--text"
+          :disabled="invalidInput"
+          @mousedown="onSubmitNewCard()"
+        >
+          Add Card
+        </v-btn>
+      </div>
+    </v-form>
+  </v-card>
 </template>
 
 <script>
@@ -55,20 +62,15 @@ export default {
 
 <style>
 .add-card {
-  padding: 10px;
-  display: block;
-  position: relative;
+  padding: 1rem;
 }
-.add-card .cancel-add-btn {
-  display: inline-block;
-  margin-left: 10px;
-  vertical-align: middle;
-  text-decoration: none;
-  color: #888;
-  font-size: 24px;
+
+.title-wrapper {
+  display: flex;
+  justify-content: space-around;
 }
-.add-card .cancel-add-btn:hover,
-.add-card .cancel-add-btn:focus {
-  color: #666;
+
+.form-box {
+  text-align: center;
 }
 </style>

@@ -4,7 +4,7 @@
       <v-container>
         <v-row>
           <v-col cols="12" sm="10">
-            <v-btn plain dark color="deep-purple" class="title-btn">
+            <v-btn plain color="deep-purple" class="title-btn">
               <input
                 class="board-title-form"
                 v-if="isEditTitle"
@@ -190,10 +190,6 @@ export default {
 </script>
 
 <style>
-h2 {
-  font-size: 2rem;
-}
-
 .title-btn {
   margin: 1rem 0 1rem 0;
 }

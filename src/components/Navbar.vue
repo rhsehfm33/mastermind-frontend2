@@ -1,6 +1,6 @@
 <template>
   <nav class="header">
-    <v-app-bar color="deep-purple" dark>
+    <v-app-bar color="deep-purple">
       <v-btn @click.prevent="onClickCreateBoard">+ New Board</v-btn>
       <v-btn @click.prevent="onClickShowMenu">Show Menu</v-btn>
       <v-spacer></v-spacer>

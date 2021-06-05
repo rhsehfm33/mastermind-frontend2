@@ -34,9 +34,9 @@
         @close="isAddCard = false"
       ></add-card>
     </div>
-    <a v-else class="add-card-btn" href="" @click.prevent="isAddCard = true">
+    <v-btn plain v-else href="" @click.prevent="isAddCard = true">
       &plus; Add a card...
-    </a>
+    </v-btn>
   </div>
 </template>
 
