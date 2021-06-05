@@ -3,7 +3,7 @@
     <div slot="header">
       <h1>
         Create New Board
-        <a href="" class="modal-close" @click.prevent="SET_IS_ADD_BOARD(false)"
+        <a href="" class=" modal-close" @click.prevent="SET_IS_ADD_BOARD(false)"
           >&times;
         </a>
       </h1>

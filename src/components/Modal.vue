@@ -43,6 +43,11 @@ export default {};
   transition: opacity 0.3s ease;
 }
 
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+}
+
 .modal-wrapper {
   display: table-cell;
   vertical-align: middle;
@@ -62,8 +67,12 @@ export default {};
 }
 
 .modal-close {
-  float: right;
+  position: absolute;
+  right: 10px;
+  top: 4px;
   text-decoration: none;
+  font-size: 18px;
+  color: #aaa;
 }
 
 .modal-enter {

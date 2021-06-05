@@ -22,6 +22,15 @@ export default {
 </script>
 
 <style>
+.delete-card-btn {
+  position: absolute;
+  right: 10px;
+  top: 4px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #aaa;
+}
+
 .router-link {
   text-decoration: none;
 }

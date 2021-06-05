@@ -2,38 +2,40 @@
   <modal class="modal-card">
     <div slot="header" class="modal-card-header">
       <div class="modal-card-header-title">
-        <v-text-field
-          solo
+        <input
+          class="form-control"
+          type="text"
           :value="card.title"
           :readonly="!toggleTitle"
           @click.prevent="toggleTitle = !toggleTitle"
           @blur="onBlurTitle"
           ref="inputTitle"
         />
+        <div>
+          <a href="" class="modal-close" @click.prevent="onClickClose"
+            >&times;</a
+          >
+        </div>
       </div>
-      <a class="modal-close-btn" href="" @click.prevent="onClickClose"
-        >&times;</a
-      >
     </div>
     <div slot="body">
       <h3>Description</h3>
-      <textarea
+      <v-textarea
         cols="30"
-        rows="3"
-        placeholder="Add a more detailed description..."
+        rows="5"
+        placeholder="Add a description..."
         :readonly="!toggleDesc"
         @click.prevent="toggleDesc = !toggleDesc"
         @blur="onBlurInputDesc"
         ref="inputDesc"
         v-model="card.description"
-      ></textarea>
+      ></v-textarea>
     </div>
     <div slot="footer"></div>
   </modal>
 </template>
 
 <script>
-import { card } from "../api";
 import Modal from "./Modal.vue";
 import { mapState, mapMutations, mapActions } from "vuex";
 
@@ -84,10 +86,7 @@ export default {
 .modal-card-header-title {
   padding-right: 30px;
 }
-.modal-close-btn {
-  position: absolute;
-  top: 0px;
-  right: 0px;
+.modal-close {
   font-size: 24px;
   text-decoration: none;
 }
