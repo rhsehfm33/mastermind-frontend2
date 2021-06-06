@@ -39,7 +39,7 @@ export default {
       this.inputTitle = this.inputTitle.trim();
       if (!this.inputTitle) return this.resotre();
       const title = this.inputTitle;
-      const pos = this.board.lists[this.board.lists.length - 1].pos * 2;
+      const pos = this.board.lists.length ? this.board.lists[this.board.lists.length - 1].pos * 2 : 65535;
       const boardId = this.board.id;
       this.ADD_LIST({ title, pos, boardId }).then(_ => this.resotre());
     },
