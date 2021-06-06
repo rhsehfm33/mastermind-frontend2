@@ -96,7 +96,7 @@ export default {
           idx > 0
             ? {
                 id: arr[idx - 1].dataset.listId,
-                pos: arr[idx - 1].dataset.listPos
+                pos: arr[idx - 1].dataset.listPos * 1
               }
             : null;
 
@@ -104,7 +104,7 @@ export default {
           idx < arr.length - 1
             ? {
                 id: arr[idx + 1].dataset.listId,
-                pos: arr[idx + 1].dataset.listPos
+                pos: arr[idx + 1].dataset.listPos * 1
               }
             : null;
       });
@@ -137,14 +137,14 @@ export default {
                 idx > 0
                   ? {
                       id: arr[idx - 1].dataset.cardId,
-                      pos: arr[idx - 1].dataset.cardPos
+                      pos: arr[idx - 1].dataset.cardPos * 1
                     }
                   : null;
               nextCard =
                 idx < arr.length - 1
                   ? {
                       id: arr[idx + 1].dataset.cardId,
-                      pos: arr[idx + 1].dataset.cardPos
+                      pos: arr[idx + 1].dataset.cardPos * 1
                     }
                   : null;
             }
