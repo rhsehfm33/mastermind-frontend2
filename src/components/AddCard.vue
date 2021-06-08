@@ -14,7 +14,10 @@
           type="text"
           v-model="inputCardTitle"
           ref="inputCardTitle"
-          @keypress.enter="onSubmitNewCard(); $emit('close')"
+          @keypress.enter="
+            onSubmitNewCard();
+            $emit('close');
+          "
           @blur="$emit('close')"
         />
         <v-btn
