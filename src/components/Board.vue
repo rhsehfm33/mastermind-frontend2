@@ -1,37 +1,35 @@
 <template>
-  <v-app>
-    <v-main>
-      <v-container>
-        <v-row>
-          <v-col cols="12" sm="10">
-            <v-btn plain color="deep-purple" class="title-btn">
-              <input
-                class="board-title-form"
-                v-if="isEditTitle"
-                v-model="inputTitle"
-                ref="inputTitle"
-                @keyup.enter="onTitleSubmit"
-                @blur="onTitleSubmit"
-              />
-              <h2 v-else @click="onClickTitle">{{ board.title }}</h2>
-            </v-btn>
-            <v-row>
-              <v-col cols="3" v-for="list in board.lists" :key="list.pos">
-                <v-card> <list :list="list"></list> </v-card>
-              </v-col>
-              <v-col cols="3">
-                <v-card><add-list /></v-card>
-              </v-col>
-            </v-row>
-          </v-col>
-          <v-col cols="12" sm="2">
-            <board-settings v-if="isShowBoardMenu" />
-            <router-view :boardId="board.id"></router-view>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
-  </v-app>
+  <v-main>
+    <v-container>
+      <v-row>
+        <v-col cols="12" sm="10">
+          <v-btn plain color="deep-purple" class="title-btn">
+            <input
+              class="board-title-form"
+              v-if="isEditTitle"
+              v-model="inputTitle"
+              ref="inputTitle"
+              @keyup.enter="onTitleSubmit"
+              @blur="onTitleSubmit"
+            />
+            <h2 v-else @click="onClickTitle">{{ board.title }}</h2>
+          </v-btn>
+          <v-row>
+            <v-col cols="3" v-for="list in board.lists" :key="list.pos">
+              <v-card> <list :list="list"></list> </v-card>
+            </v-col>
+            <v-col cols="3">
+              <v-card><add-list /></v-card>
+            </v-col>
+          </v-row>
+        </v-col>
+        <v-col cols="12" sm="2">
+          <board-settings v-if="isShowBoardMenu" />
+          <router-view :boardId="board.id"></router-view>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-main>
 </template>
 
 <script>

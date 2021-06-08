@@ -10,10 +10,7 @@
       <v-spacer></v-spacer>
       <div class="header-auth">
         <a v-if="isAuthenicated" href="" @click.prevent="logout">Logout</a>
-        <template v-else>
-          <router-link to="/login" class="user-nav-btn">Login</router-link>
-          <router-link to="/register" class="user-nav-btn">Sign Up</router-link>
-        </template>
+        <router-link v-else to="/login">Login</router-link>
       </div>
     </v-app-bar>
   </nav>
@@ -79,8 +76,5 @@ export default {
 .header a:hover,
 .header a:focus {
   color: rgba(255, 255, 255);
-}
-.user-nav-btn {
-  padding-left: 10px;
 }
 </style>
