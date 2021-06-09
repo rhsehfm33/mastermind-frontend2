@@ -1,8 +1,8 @@
 <template>
   <nav class="header">
     <v-app-bar color="deep-purple">
-      <v-btn @click.prevent="onClickCreateBoard">+ New Board</v-btn>
-      <v-btn @click.prevent="onClickShowMenu">Show Menu</v-btn>
+      <v-btn v-if="isNewBoardValid" @click.prevent="onClickCreateBoard">+ New Board</v-btn>
+      <v-btn v-if="isShowMenuValid" @click.prevent="onClickShowMenu">Show Menu</v-btn>
       <v-spacer></v-spacer>
       <v-toolbar-title
         ><router-link to="/">{{ appTitle }}</router-link>
@@ -24,20 +24,34 @@ export default {
   components: { AddBoard },
   data() {
     return {
-      appTitle: "MasterMind"
+      appTitle: "MasterMind",
+      rPath: ""
     };
   },
   computed: {
     ...mapState({
       isAddBoard: "isAddBoard",
+      isShowBoardMenu: "isShowBoardMenu",
       navbarColor: "navbarColor",
       bodyColor: "bodyColor"
     }),
     isAuthenicated() {
       return this.$store.getters.isAuthenticated;
+    },
+    isNewBoardValid() {
+      return this.rPath === "/" && this.isAuthenicated;
+    },
+    isShowMenuValid() {
+      return this.rPath.includes("/board/") && this.isShowBoardMenu == false;
     }
   },
+  created() {
+    this.rPath = this.$router.currentRoute.path;
+  },
   watch: {
+    $route: function(to, from) {
+      this.rPath = to.path;
+    },
     bodyColor: "updateTheme"
   },
   mounted() {
