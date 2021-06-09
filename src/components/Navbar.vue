@@ -24,7 +24,7 @@ export default {
   components: { AddBoard },
   data() {
     return {
-      appTitle: "MasterMind",
+      appTitle: "Mastermind",
       rPath: ""
     };
   },

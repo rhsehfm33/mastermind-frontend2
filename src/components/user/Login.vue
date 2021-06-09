@@ -40,7 +40,7 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      LoginTitle: "Welcome to MasterMind",
+      LoginTitle: "Welcome to Mastermind",
       email: "",
       password: "",
       error: "",
