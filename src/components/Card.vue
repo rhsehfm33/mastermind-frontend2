@@ -2,8 +2,7 @@
   <modal class="modal-card">
     <div slot="header" class="modal-card-header">
       <div class="modal-card-header-title">
-        <input
-          class="form-control"
+        <v-text-field
           type="text"
           :value="card.title"
           :readonly="!toggleTitle"
