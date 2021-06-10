@@ -1,21 +1,17 @@
 <template>
   <modal class="modal-card">
     <div slot="header" class="modal-card-header">
-      <div class="modal-card-header-title">
-        <v-text-field
-          type="text"
-          :value="card.title"
-          :readonly="!toggleTitle"
-          @click.prevent="toggleTitle = !toggleTitle"
-          @blur="onBlurTitle"
-          ref="inputTitle"
-        />
-        <div>
-          <a href="" class="modal-close" @click.prevent="onClickClose"
-            >&times;</a
-          >
-        </div>
-      </div>
+      <v-text-field
+        solo
+        type="text"
+        :value="card.title"
+        :readonly="!toggleTitle"
+        @click.prevent="toggleTitle = !toggleTitle"
+        @blur="onBlurTitle"
+        ref="inputTitle"
+      />
+
+      <v-btn plain color="blue" @click.prevent="onClickClose">&times;</v-btn>
     </div>
     <div slot="body">
       <h3>Description</h3>
@@ -82,14 +78,10 @@ export default {
   max-width: 800px;
   width: 60%;
 }
-.modal-card-header-title {
-  padding-right: 30px;
-}
-.modal-close {
-  font-size: 24px;
-  text-decoration: none;
-}
+
 .modal-card-header {
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
 }
 </style>

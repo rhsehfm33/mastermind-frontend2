@@ -9,7 +9,7 @@
       @keyup.enter="onSubmitTitle"
       @blur="resotre"
     ></v-text-field>
-    <a v-else @click="onClickAddList">&plus; Add another list</a>
+    <v-btn plain v-else @click="onClickAddList">&plus; Add another list</v-btn>
   </v-card>
 </template>
 
@@ -58,8 +58,6 @@ export default {
 .add-list {
   background-color: rgba(0, 0, 0, 0.1);
   padding: 20px;
-  color: #ddd;
-  transition: all 0.3s;
   text-decoration: none;
 }
 .add-list:hover,

@@ -1,8 +1,8 @@
 <template>
-  <div class="list" :data-list-id="list.id" :data-list-pos="list.pos">
-    <div class="list-header">
-      <input
-        class=" input-title"
+  <v-card :data-list-id="list.id" :data-list-pos="list.pos">
+    <div class="card-header">
+      <v-text-field
+        outlined
         v-if="isEditTitle"
         type="text"
         v-model="inputTitle"
@@ -10,12 +10,9 @@
         @keyup.enter="onTitleSubmit"
         @blur="onTitleSubmit"
       />
-      <div v-else class="list-header-title" @click="onClickTitle">
+      <v-card-title v-else @click="onClickTitle">
         {{ list.title }}
-      </div>
-      <a class="delete-list-btn" href="" @click.prevent="onDeleteList"
-        >&times;</a
-      >
+      </v-card-title>
     </div>
 
     <div class="card-list" :data-list-id="list.id">
@@ -27,17 +24,20 @@
         :boardId="list.boardId"
       ></card-item>
     </div>
-    <div v-if="isAddCard">
-      <add-card
-        :pos="lastCardPos"
-        :listId="list.id"
-        @close="isAddCard = false"
-      ></add-card>
+    <div class="btn-wrapper">
+      <div v-if="isAddCard">
+        <add-card
+          :pos="lastCardPos"
+          :listId="list.id"
+          @close="isAddCard = false"
+        ></add-card>
+      </div>
+      <v-btn plain color="green" v-else @click.prevent="isAddCard = true">
+        &plus; Add a card
+      </v-btn>
+      <v-btn plain color="red" @click.prevent="onDeleteList">delete</v-btn>
     </div>
-    <v-btn plain v-else href="" @click.prevent="isAddCard = true">
-      &plus; Add a card...
-    </v-btn>
-  </div>
+  </v-card>
 </template>
 
 <script>
@@ -83,7 +83,7 @@ export default {
       this.UPDATE_LIST({ id, title }).then(_ => (this.isEditTitle = false));
     },
     onDeleteList() {
-      if (!confirm(`Delete ${this.list.title} list?`)) return;
+      if (!confirm(`${this.list.title} 리스트를 삭제할까요?`)) return;
       this.DELETE_LIST({ id: this.list.id });
     }
   }
@@ -91,39 +91,16 @@ export default {
 </script>
 
 <style>
-.list {
-  background-color: #e2e4e6;
-  border-radius: 3px;
-  margin-right: 10px;
+.card-header {
   display: flex;
-  flex-direction: column;
-  vertical-align: top;
-  width: 100%;
-  max-height: 100%;
+  justify-content: center;
 }
-.list-header {
-  flex: 0 0 auto;
-  height: 30px;
-  padding: 10px 8px 8px;
-  position: relative;
+
+.btn-wrapper {
+  display: flex;
+  justify-content: space-around;
 }
-.list-header-title {
-  font-size: 16px;
-  font-weight: 700;
-  padding-left: 8px;
-  line-height: 30px;
-}
-.input-title {
-  width: 90%;
-}
-.delete-list-btn {
-  position: absolute;
-  right: 10px;
-  top: 8px;
-  text-decoration: none;
-  color: #aaa;
-  font-size: 24px;
-}
+
 .card-list {
   flex: 1 1 auto;
   overflow-y: scroll;
@@ -132,16 +109,5 @@ export default {
   height: 10px;
   width: 100%;
   background-color: rgba(0, 0, 0, 0);
-}
-.add-card-btn {
-  flex: 0 0 auto;
-  display: block;
-  padding: 8px 10px;
-  color: #8c8c8c;
-  text-decoration: none;
-}
-.add-card-btn:focus,
-.add-card-btn:hover {
-  background-color: rgba(0, 0, 0, 0.1);
 }
 </style>
