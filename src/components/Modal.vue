@@ -45,15 +45,21 @@ export default {};
 
 .modal-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 700;
 }
 
+/* modal이 정중앙에 나타내기 */
 .modal-wrapper {
   display: table-cell;
   vertical-align: middle;
 }
 
 .modal-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   width: 450px;
   margin: 0px auto;
   padding: 20px 30px;

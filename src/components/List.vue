@@ -41,7 +41,6 @@
 </template>
 
 <script>
-import { card } from "../api";
 import CardItem from "./CardItem.vue";
 import AddCard from "./AddCard.vue";
 import { mapActions } from "vuex";

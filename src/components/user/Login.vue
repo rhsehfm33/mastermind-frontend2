@@ -1,39 +1,37 @@
 <template>
-  <v-app>
-    <v-main>
-      <v-container class="login-box">
-        <v-layout>
-          <v-flex elevation-4>
-            <v-card class="login-card">
-              <h2>{{ LoginTitle }}</h2>
-              <v-form @submit.prevent="onSubmit">
-                <v-text-field
-                  label="e-mail"
-                  v-model="email"
-                  required
-                ></v-text-field>
-                <v-text-field
-                  label="password"
-                  v-model="password"
-                  type="password"
-                  required
-                ></v-text-field>
-                <v-btn
-                  block
-                  class="white--text"
-                  color="deep-purple"
-                  type="submit"
-                  :disabled="invalidForm"
-                  >Login</v-btn
-                >
-              </v-form>
-              <p v-if="error" style="color:red">{{ error }}</p>
-            </v-card>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-main>
-  </v-app>
+  <v-main>
+    <v-container class="login-box">
+      <v-layout>
+        <v-flex elevation-4>
+          <v-card class="login-card">
+            <h2>{{ LoginTitle }}</h2>
+            <v-form @submit.prevent="onSubmit">
+              <v-text-field
+                label="e-mail"
+                v-model="email"
+                required
+              ></v-text-field>
+              <v-text-field
+                label="password"
+                v-model="password"
+                type="password"
+                required
+              ></v-text-field>
+              <v-btn
+                block
+                class="white--text"
+                color="deep-purple"
+                type="submit"
+                :disabled="invalidForm"
+                >Login</v-btn
+              >
+            </v-form>
+            <p v-if="error" style="color:red">{{ error }}</p>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </v-main>
 </template>
 
 <script>

@@ -1,12 +1,12 @@
 <template>
   <modal>
     <div slot="header">
-      <h1>
+      <span>
         Create New Board
-        <a href="" class=" modal-close" @click.prevent="SET_IS_ADD_BOARD(false)"
-          >&times;
-        </a>
-      </h1>
+      </span>
+      <v-btn color="blue" plain x-large @click.prevent="SET_IS_ADD_BOARD(false)"
+        >&times;
+      </v-btn>
     </div>
     <div slot="body">
       <form id="add-board" @submit.prevent="onSubmitCreateBoard">

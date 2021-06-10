@@ -1,21 +1,19 @@
 <template>
-  <v-app>
-    <v-main>
-      <v-container>
-        <v-row>
-          <v-col v-for="(board, i) in boardList" :key="i" cols="4">
-            <router-link class="router-link" :to="`/board/${board.id}`">
-              <v-card height="200" :data-bgcolor="board.bgColor">
-                <v-card-title>{{ board.title }}</v-card-title>
-              </v-card>
-            </router-link>
-          </v-col>
-          <v-col cols="12" sm="2"> </v-col>
-        </v-row>
-        <AddBoard v-if="isAddBoard" />
-      </v-container>
-    </v-main>
-  </v-app>
+  <v-main>
+    <v-container>
+      <v-row>
+        <v-col v-for="(board, i) in boardList" :key="i" cols="4">
+          <router-link class="router-link" :to="`/board/${board.id}`">
+            <v-card height="200" :data-bgcolor="board.bgColor">
+              <v-card-title>{{ board.title }}</v-card-title>
+            </v-card>
+          </router-link>
+        </v-col>
+        <v-col cols="12" sm="2"> </v-col>
+      </v-row>
+      <AddBoard v-if="isAddBoard" />
+    </v-container>
+  </v-main>
 </template>
 
 <script>
@@ -45,5 +43,3 @@ export default {
   }
 };
 </script>
-
-<style></style>
