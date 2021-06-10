@@ -1,15 +1,22 @@
 <template>
   <v-app>
     <v-main>
-      <v-container class="login-box">
+      <v-container class="sign-up-box">
         <v-layout>
           <v-flex elevation-4>
-            <v-card class="login-card">
-              <h2>{{ LoginTitle }}</h2>
+            <v-card class="sign-up-card">
+              <h2>{{ SignUpTitle }}</h2>
               <v-form @submit.prevent="onSubmit">
+                <v-text-field
+                  label="name"
+                  v-model="name"
+                  required
+                ></v-text-field>
+                <h5 v-if="!isEmailValid" class="duplicate-warn">{{ DuplicatedEmail }}</h5>
                 <v-text-field
                   label="e-mail"
                   v-model="email"
+                  @blur="onEmailBlur()"
                   required
                 ></v-text-field>
                 <v-text-field
@@ -24,7 +31,7 @@
                   color="deep-purple"
                   type="submit"
                   :disabled="invalidForm"
-                  >Login</v-btn
+                  >Sign up</v-btn
                 >
               </v-form>
               <p v-if="error" style="color:red">{{ error }}</p>
@@ -42,27 +49,39 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      LoginTitle: "Welcome to Mastermind",
+      SignUpTitle: "Sign up",
+      DuplicatedEmail: "Email has been already used",
+      name: "",
       email: "",
       password: "",
       error: "",
-      rPath: ""
+      rPath: "",
+      isEmailValid: true
     };
   },
   computed: {
     invalidForm() {
-      return !this.email || !this.password;
+      return !this.name || !this.email || !this.password || !this.isEmailValid;
     }
   },
   created() {
     this.rPath = this.$route.query.rPath || "/";
   },
   methods: {
-    ...mapActions(["LOGIN"]),
-    onSubmit() {
-      this.LOGIN({ email: this.email, password: this.password })
+    ...mapActions(["REGISTER", "CHECK_EMAIL"]),
+    onEmailBlur() {
+      this.CHECK_EMAIL({ email: this.email })
         .then(data => {
-          this.$router.push(this.rPath);
+          this.isEmailValid = true;
+        })
+        .catch(err => {
+          this.isEmailValid = false;
+        });
+    },
+    onSubmit() {
+      this.REGISTER({ name: this.name, email: this.email, password: this.password })
+        .then(data => {
+          this.$router.push('/');
         })
         .catch(err => {
           this.error = err.response.data.error;
@@ -73,13 +92,17 @@ export default {
 </script>
 
 <style>
-.login-box {
+.sign-up-box {
   width: 450px;
   margin-top: 50px;
   text-align: center;
 }
 
-.login-card {
+.sign-up-card {
   padding: 30px;
+}
+
+.duplicate-warn {
+  color: red;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <v-content>Not Found</v-content>
+  <v-app>Not Found</v-app>
 </template>
 
 <script>

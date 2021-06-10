@@ -35,6 +35,13 @@ export const auth = {
   login(email, password) {
     return request.post('/login', {email, password})
       .then(({data}) => data)
+  },
+  check_email(email) {
+    return request.post('/check_email', {email})
+      .then(({data}) => data)
+  },
+  register(name, email, password) {
+    return request.post('/register', {name, email, password})
   }
 }
 

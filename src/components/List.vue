@@ -1,9 +1,8 @@
 <template>
-  <v-card class="list" :data-list-id="list.id" :data-list-pos="list.pos">
-    <!-- v-subheader : 목록의 섹션을 구분하는 데 사용하는 컴포넌트 -->
-    <div class="list-title">
-      <v-text-field
-        solo
+  <div class="list" :data-list-id="list.id" :data-list-pos="list.pos">
+    <div class="list-header">
+      <input
+        class=" input-title"
         v-if="isEditTitle"
         type="text"
         v-model="inputTitle"
@@ -11,16 +10,14 @@
         @keyup.enter="onTitleSubmit"
         @blur="onTitleSubmit"
       />
-      <div v-else class="list-header-title">
+      <div v-else class="list-header-title" @click="onClickTitle">
         {{ list.title }}
       </div>
-      <v-btn plain color="success" @click="onClickTitle">
-        Edit
-      </v-btn>
-      <v-btn plain color="red" @click.prevent="onDeleteList">
-        &times;
-      </v-btn>
+      <a class="delete-list-btn" href="" @click.prevent="onDeleteList"
+        >&times;</a
+      >
     </div>
+
     <div class="card-list" :data-list-id="list.id">
       <div v-show="!list.cards.length" class="empty-card-item"></div>
       <card-item
@@ -40,10 +37,11 @@
     <v-btn plain v-else href="" @click.prevent="isAddCard = true">
       &plus; Add a card...
     </v-btn>
-  </v-card>
+  </div>
 </template>
 
 <script>
+import { card } from "../api";
 import CardItem from "./CardItem.vue";
 import AddCard from "./AddCard.vue";
 import { mapActions } from "vuex";
@@ -95,28 +93,38 @@ export default {
 
 <style>
 .list {
+  background-color: #e2e4e6;
+  border-radius: 3px;
+  margin-right: 10px;
   display: flex;
   flex-direction: column;
+  vertical-align: top;
+  width: 100%;
+  max-height: 100%;
 }
-
+.list-header {
+  flex: 0 0 auto;
+  height: 30px;
+  padding: 10px 8px 8px;
+  position: relative;
+}
 .list-header-title {
-  margin: 0 auto;
   font-size: 16px;
   font-weight: 700;
-  /* vertical-align: middle; */
-  padding: 7px 0 0 10px;
-  /* text-align: center; */
+  padding-left: 8px;
+  line-height: 30px;
 }
-.list-title {
-  display: flex;
-  justify-content: center;
-  padding-top: 5px;
-}
-
 .input-title {
   width: 90%;
 }
-
+.delete-list-btn {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  text-decoration: none;
+  color: #aaa;
+  font-size: 24px;
+}
 .card-list {
   flex: 1 1 auto;
   overflow-y: scroll;

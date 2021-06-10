@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../components/Home";
 import Login from "../components/user/Login.vue";
+import Register from "../components/user/Register.vue";
 import Board from "../components/Board";
 import Card from "../components/Card";
 import NotFound from "../components/NotFound";
@@ -21,6 +22,7 @@ const requireAuth = () => (from, to, next) => {
 const routes = [
   { path: "/", component: Home, beforeEnter: requireAuth() },
   { path: "/login", component: Login },
+  { path: "/register", component: Register },
   {
     path: "/board/:id",
     component: Board,

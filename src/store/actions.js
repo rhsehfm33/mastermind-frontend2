@@ -5,6 +5,12 @@ const actions = {
     return auth.login(email, password)
       .then(({ accessToken }) => commit('LOGIN', { accessToken }))
   },
+  CHECK_EMAIL({ commit }, { email }) {
+    return auth.check_email(email);
+  },
+  REGISTER({ commit }, { name, email, password }) {
+    return auth.register(name, email, password);
+  },
   FETCH_BOARD_LIST ({commit}) {
     return board.fetch()
       .then(data => commit('SET_BOARD_LIST', data))
