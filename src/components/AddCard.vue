@@ -3,23 +3,23 @@
     <div class="title-wrapper">
       <h5>
         New Card
-        <a href="" class="modal-close" @click.prevent="SET_IS_ADD_BOARD(false)"
-          >&times;
-        </a>
       </h5>
+      <v-btn plain color="blue" @click.prevent="SET_IS_ADD_BOARD(false)"
+        >&times;
+      </v-btn>
     </div>
     <v-form @submit.prevent="onSubmitNewCard">
-      <div class="form-box">
-        <v-text-field
-          type="text"
-          v-model="inputCardTitle"
-          ref="inputCardTitle"
-          @keypress.enter="
-            onSubmitNewCard();
-            $emit('close');
-          "
-          @blur="$emit('close')"
-        />
+      <v-text-field
+        type="text"
+        v-model="inputCardTitle"
+        ref="inputCardTitle"
+        @keypress.enter="
+          onSubmitNewCard();
+          $emit('close');
+        "
+        @blur="$emit('close')"
+      />
+      <div class="btn-wrapper">
         <v-btn
           color="deep-purple"
           class="white--text"
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   props: ["pos", "listId"],
@@ -71,10 +71,11 @@ export default {
 
 .title-wrapper {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: baseline;
 }
 
-.form-box {
+.btn-wrapper {
   text-align: center;
 }
 </style>

@@ -72,15 +72,6 @@ export default {};
   margin: 20px 0;
 }
 
-.modal-close {
-  position: absolute;
-  right: 10px;
-  top: 4px;
-  text-decoration: none;
-  font-size: 18px;
-  color: #aaa;
-}
-
 .modal-enter {
   opacity: 0;
 }

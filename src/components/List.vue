@@ -13,6 +13,7 @@
       <v-card-title v-else @click="onClickTitle">
         {{ list.title }}
       </v-card-title>
+      <v-btn plain color="red" @click.prevent="onDeleteList">delete</v-btn>
     </div>
 
     <div class="card-list" :data-list-id="list.id">
@@ -35,7 +36,6 @@
       <v-btn plain color="green" v-else @click.prevent="isAddCard = true">
         &plus; Add a card
       </v-btn>
-      <v-btn plain color="red" @click.prevent="onDeleteList">delete</v-btn>
     </div>
   </v-card>
 </template>
@@ -94,6 +94,7 @@ export default {
 .card-header {
   display: flex;
   justify-content: center;
+  align-items: baseline;
 }
 
 .btn-wrapper {
