@@ -5,9 +5,11 @@ const actions = {
     return auth.login(email, password)
       .then(({ accessToken }) => commit('LOGIN', { accessToken }))
   },
+  // 이메일 중복 체크
   CHECK_EMAIL({ commit }, { email }) {
     return auth.check_email(email);
   },
+  // 회원 가입
   REGISTER({ commit }, { name, email, password }) {
     return auth.register(name, email, password);
   },

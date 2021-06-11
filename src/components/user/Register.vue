@@ -52,7 +52,7 @@ export default {
       password: "",
       error: "",
       rPath: "",
-      isEmailValid: true
+      isEmailValid: true  // 입력된 이메일이 이미 사용됐으면 false, 그렇지 않으면 true
     };
   },
   computed: {
@@ -65,6 +65,7 @@ export default {
   },
   methods: {
     ...mapActions(["REGISTER", "CHECK_EMAIL"]),
+    // Email 창에서 focus가 없어질 시에, email 중복에 대해 체크함
     onEmailBlur() {
       this.CHECK_EMAIL({ email: this.email })
         .then(data => {
