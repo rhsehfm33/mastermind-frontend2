@@ -2,7 +2,7 @@
   <div class="board-menu">
     <div class="board-menu-header">
       <span>Menu</span>
-      <v-btn plain @click.prevent="onClickClose">&times;</v-btn>
+      <v-btn plain x-large @click.prevent="onClickClose">&times;</v-btn>
     </div>
     <ul class="menu-list">
       <li><a href="" @click.prevent="onClickDeleteBoard">Delete Board</a></li>
@@ -61,7 +61,7 @@ export default {
       const bgColor = el.target.dataset.value;
       this.UPDATE_BOARD({ id, bgColor }).then(_ => {
         document.querySelector(
-          "body"
+          ".body"
         ).style.backgroundColor = this.board.bgColor;
         document.querySelector(
           ".header"
@@ -83,9 +83,14 @@ export default {
   transition: all 0.3s;
 }
 .board-menu-header {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
   height: 46px;
   padding: 0 6px 0 12px;
   border-bottom: #bbb solid 1px;
+  font-size: 24px;
+  font-weight: 700;
 }
 
 .menu-list {
@@ -117,9 +122,10 @@ export default {
 }
 .color-picker a {
   display: inline-block;
-  width: 49%;
-  height: 100px;
-  border-radius: 8px;
+  margin-top: 15px;
+  width: 20%;
+  height: 50px;
+  border-radius: 10px;
 }
 .color-picker a:hover,
 .color-picker a:focus {

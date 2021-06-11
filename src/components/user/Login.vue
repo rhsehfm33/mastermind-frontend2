@@ -20,7 +20,7 @@
               <v-btn
                 block
                 class="white--text"
-                color="deep-purple"
+                color="black"
                 type="submit"
                 :disabled="invalidForm"
                 >Login</v-btn

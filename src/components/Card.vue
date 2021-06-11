@@ -1,16 +1,17 @@
 <template>
   <modal class="modal-card">
     <div slot="header" class="modal-card-header">
-      <v-text-field
-        solo
-        type="text"
-        :value="card.title"
-        :readonly="!toggleTitle"
-        @click.prevent="toggleTitle = !toggleTitle"
-        @blur="onBlurTitle"
-        ref="inputTitle"
-      />
-
+      <div class="modal-card-header-title">
+        <input
+          class="form-control"
+          type="text"
+          :value="card.title"
+          :readonly="!toggleTitle"
+          @click.prevent="toggleTitle = !toggleTitle"
+          @blur="onBlurTitle"
+          ref="inputTitle"
+        />
+      </div>
       <v-btn plain color="blue" @click.prevent="onClickClose">&times;</v-btn>
     </div>
     <div slot="body">

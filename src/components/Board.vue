@@ -1,9 +1,9 @@
 <template>
-  <v-main>
-    <v-container>
-      <v-row>
-        <v-col cols="12" sm="10">
-          <v-btn plain color="deep-purple" class="title-btn">
+  <v-main class="body">
+    <div class="board-wrapper ">
+      <div class="board">
+        <div class="board-header">
+          <v-btn plain color="black" class="title-btn">
             <input
               class="board-title-form"
               v-if="isEditTitle"
@@ -14,21 +14,25 @@
             />
             <h2 v-else @click="onClickTitle">{{ board.title }}</h2>
           </v-btn>
-          <v-row>
-            <v-col cols="3" v-for="list in board.lists" :key="list.pos">
-              <v-card> <list :list="list"></list> </v-card>
-            </v-col>
-            <v-col cols="3">
-              <v-card><add-list /></v-card>
-            </v-col>
-          </v-row>
-        </v-col>
-        <v-col cols="12" sm="2">
-          <board-settings v-if="isShowBoardMenu" />
-          <router-view :boardId="board.id"></router-view>
-        </v-col>
-      </v-row>
-    </v-container>
+        </div>
+        <div class="list-section-wrapper">
+          <div class="list-section">
+            <div
+              class="list-wrapper"
+              v-for="list in board.lists"
+              :key="list.pos"
+            >
+              <list :list="list"></list>
+            </div>
+            <div class="list-wrapper">
+              <add-list />
+            </div>
+          </div>
+        </div>
+        <board-settings v-if="isShowBoardMenu" />
+        <router-view :boardId="board.id"></router-view>
+      </div>
+    </div>
   </v-main>
 </template>
 
@@ -79,43 +83,36 @@ export default {
       }
     }).on("drop", (el, wrapper, target, siblings) => {
       const targetList = {
-        id: el.children[0].dataset.listId,
+        id: el.children[0].dataset.listId * 1,
         pos: 65535
       };
       let prevList = null;
       let nextList = null;
-
       Array.from(wrapper.querySelectorAll(".list")).forEach((el, idx, arr) => {
-        // const listId = null;
-        const listFound = targetList.id === el.dataset.listId;
-
+        const listId = null;
+        const listFound = targetList.id === el.dataset.listId * 1;
         if (!listFound) return;
-
         prevList =
           idx > 0
             ? {
-                id: arr[idx - 1].dataset.listId,
+                id: arr[idx - 1].dataset.listId * 1,
                 pos: arr[idx - 1].dataset.listPos * 1
               }
             : null;
-
         nextList =
           idx < arr.length - 1
             ? {
-                id: arr[idx + 1].dataset.listId,
+                id: arr[idx + 1].dataset.listId * 1,
                 pos: arr[idx + 1].dataset.listPos * 1
               }
             : null;
       });
-
       if (!prevList && nextList) targetList.pos = nextList.pos / 2;
       else if (!nextList && prevList) targetList.pos = prevList.pos * 2;
       else if (nextList && prevList)
         targetList.pos = (prevList.pos + nextList.pos) / 2;
-
       this.UPDATE_LIST(targetList);
     });
-
     this.drake = dragula([...this.$el.querySelectorAll(".card-list")]).on(
       "drop",
       (el, wrapper, target, silblings) => {
@@ -189,6 +186,41 @@ export default {
 </script>
 
 <style>
+.board-wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+.board {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.list-section-wrapper {
+  flex-grow: 1;
+  position: relative;
+}
+.list-section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding: 0 10px;
+}
+.list-wrapper {
+  display: inline-block;
+  height: 100%;
+  width: 272px;
+  vertical-align: top;
+  margin-right: 5px;
+}
 .title-btn {
   margin: 1rem 0 1rem 0;
 }

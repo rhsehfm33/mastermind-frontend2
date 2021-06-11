@@ -21,7 +21,7 @@
     </div>
     <div slot="footer">
       <v-btn
-        color="deep-purple"
+        color="black"
         class="white--text"
         block
         :class="{ 'btn-success': isValidInput }"

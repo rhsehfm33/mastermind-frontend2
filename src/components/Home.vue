@@ -6,10 +6,12 @@
           <router-link class="router-link" :to="`/board/${board.id}`">
             <v-card
               class="board-item"
-              height="200"
+              height="150"
               :data-bgcolor="board.bgColor"
             >
-              <v-card-title>{{ board.title }}</v-card-title>
+              <v-card-title class="white--text d-flex justify-center">{{
+                board.title
+              }}</v-card-title>
             </v-card>
           </router-link>
         </v-col>

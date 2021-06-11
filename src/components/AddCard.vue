@@ -21,7 +21,7 @@
       />
       <div class="btn-wrapper">
         <v-btn
-          color="deep-purple"
+          color="black"
           class="white--text"
           :disabled="invalidInput"
           @mousedown="onSubmitNewCard()"

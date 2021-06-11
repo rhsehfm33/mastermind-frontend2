@@ -56,7 +56,7 @@ export default {
 
 <style scoped>
 .add-list {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.3);
   padding: 20px;
   text-decoration: none;
 }

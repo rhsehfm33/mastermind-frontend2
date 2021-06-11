@@ -36,12 +36,10 @@ export const auth = {
     return request.post('/login', {email, password})
       .then(({data}) => data)
   },
-  // 이메일 중복 체크
   check_email(email) {
     return request.post('/check_email', {email})
       .then(({data}) => data)
   },
-  // 회원 가입
   register(name, email, password) {
     return request.post('/register', {name, email, password})
   }
