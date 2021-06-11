@@ -4,7 +4,11 @@
       <v-row>
         <v-col v-for="(board, i) in boardList" :key="i" cols="4">
           <router-link class="router-link" :to="`/board/${board.id}`">
-            <v-card height="200" :data-bgcolor="board.bgColor">
+            <v-card
+              class="board-item"
+              height="200"
+              :data-bgcolor="board.bgColor"
+            >
               <v-card-title>{{ board.title }}</v-card-title>
             </v-card>
           </router-link>
@@ -34,7 +38,7 @@ export default {
   },
   updated() {
     Array.from(document.querySelectorAll(".board-item")).forEach(el => {
-      el.style.backgroundColor = el.dataset.bgcolor || "#ddd";
+      el.style.backgroundColor = el.dataset.bgcolor || "rgb(103,58,181)";
     });
   },
   methods: {

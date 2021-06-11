@@ -1,8 +1,12 @@
 <template>
-  <nav class="header">
-    <v-app-bar color="deep-purple">
-      <v-btn v-if="isNewBoardValid" @click.prevent="onClickCreateBoard">+ New Board</v-btn>
-      <v-btn v-if="isShowMenuValid" @click.prevent="onClickShowMenu">Show Menu</v-btn>
+  <nav>
+    <v-app-bar class="header">
+      <v-btn v-if="isNewBoardValid" @click.prevent="onClickCreateBoard"
+        >+ New Board</v-btn
+      >
+      <v-btn v-if="isShowMenuValid" @click.prevent="onClickShowMenu"
+        >Show Menu</v-btn
+      >
       <v-spacer></v-spacer>
       <v-toolbar-title
         ><router-link to="/">{{ appTitle }}</router-link>
@@ -58,13 +62,15 @@ export default {
     bodyColor: "updateTheme"
   },
   mounted() {
+    // mount 됐을 때 Theme를 업데이트하는 작업
     this.updateTheme();
   },
   methods: {
     ...mapMutations(["SET_IS_ADD_BOARD", "SET_IS_SHOW_BOARD_MENU"]),
     updateTheme() {
       this.$el.style.backgroundColor = this.navbarColor;
-      const body = document.querySelector("body");
+      const body = document.querySelector(".header");
+      // body가 없으면 return, 있으면 배경화면에 bodyColor 값 대입
       if (!body) return;
       body.style.backgroundColor = this.bodyColor;
     },

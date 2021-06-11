@@ -28,8 +28,10 @@ const mutations = {
     state.isShowBoardMenu = toggle;
   },
   SET_THEME(state, color) {
-    state.bodyColor = color ? color : "rgb(255,255,255)";
-    state.navbarColor = color ? "rgba(0,0,0,.15)" : "#026aa7";
+    // 배경화면 색깔 : bodyColor 상태에 color가 들어오면 color로, 아니면 보라색 기본값으로 변경
+    state.bodyColor = color ? color : "rgb(103,58,182)";
+    // 상단 색깔 : navbarColor에 color값이 있으면 color, 없을 경우 기본값 설정
+    state.navbarColor = color ? "rgba(0,0,0,.15)" : "rgb(103,58,182)";
   }
 };
 

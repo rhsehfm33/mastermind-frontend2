@@ -64,6 +64,7 @@ export default {
   created() {
     this.fetchData().then(_ => {
       this.inputTitle = this.board.title;
+      // 테마 컬러 전달
       this.SET_THEME(this.board.bgColor);
     });
   },
@@ -85,7 +86,7 @@ export default {
       let nextList = null;
 
       Array.from(wrapper.querySelectorAll(".list")).forEach((el, idx, arr) => {
-        const listId = null;
+        // const listId = null;
         const listFound = targetList.id === el.dataset.listId;
 
         if (!listFound) return;

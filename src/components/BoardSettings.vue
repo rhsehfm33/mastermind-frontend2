@@ -1,10 +1,8 @@
 <template>
   <div class="board-menu">
     <div class="board-menu-header">
-      <div class="header-title">Menu</div>
-      <a class="header-close-btn" href="" @click.prevent="onClickClose"
-        >&times;</a
-      >
+      <span>Menu</span>
+      <v-btn plain @click.prevent="onClickClose">&times;</v-btn>
     </div>
     <ul class="menu-list">
       <li><a href="" @click.prevent="onClickDeleteBoard">Delete Board</a></li>
@@ -65,8 +63,9 @@ export default {
         document.querySelector(
           "body"
         ).style.backgroundColor = this.board.bgColor;
-        document.querySelector(".header").style.backgroundColor =
-          "rgba(0,0,0,.15)";
+        document.querySelector(
+          ".header"
+        ).style.backgroundColor = this.board.bgColor;
       });
     }
   }
@@ -88,20 +87,7 @@ export default {
   padding: 0 6px 0 12px;
   border-bottom: #bbb solid 1px;
 }
-.header-title {
-  font-size: 18px;
-  text-align: center;
-  line-height: 46px;
-  font-weight: 700;
-}
-.header-close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  text-decoration: none;
-  font-size: 24px;
-  color: #999;
-}
+
 .menu-list {
   list-style: none;
   padding-left: 0px;
