@@ -52,7 +52,7 @@ export default {
     return {
       isAddCard: false,
       isEditTitle: false,
-      inputTitle: ""
+      inputTitle: "",
     };
   },
   created() {
@@ -64,7 +64,7 @@ export default {
       let pos = 65535;
       if (lastCard) pos = lastCard.pos + pos;
       return pos;
-    }
+    },
   },
   methods: {
     ...mapActions(["UPDATE_LIST", "DELETE_LIST"]),
@@ -85,8 +85,8 @@ export default {
     onDeleteList() {
       if (!confirm(`Delete ${this.list.title} list?`)) return;
       this.DELETE_LIST({ id: this.list.id });
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -99,6 +99,7 @@ export default {
   flex-direction: column;
   vertical-align: top;
   width: 100%;
+  min-height: 100px;
   max-height: 100%;
 }
 .list-header {

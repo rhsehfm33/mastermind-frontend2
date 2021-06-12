@@ -31,7 +31,7 @@
                 >Sign up</v-btn
               >
             </v-form>
-            <p v-if="error" style="color:red">{{ error }}</p>
+            <p v-if="error" style="color: red">{{ error }}</p>
           </v-card>
         </v-flex>
       </v-layout>
@@ -40,31 +40,31 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex';
 
 export default {
   data() {
     return {
-      SignUpTitle: "Sign up",
-      DuplicatedEmail: "Email has been already used",
-      name: "",
-      email: "",
-      password: "",
-      error: "",
-      rPath: "",
-      isEmailValid: true // 입력된 이메일이 이미 사용됐으면 false, 그렇지 않으면 true
+      SignUpTitle: 'Sign up',
+      DuplicatedEmail: 'Email has been already used',
+      name: '',
+      email: '',
+      password: '',
+      error: '',
+      rPath: '',
+      isEmailValid: true, // 입력된 이메일이 이미 사용됐으면 false, 그렇지 않으면 true
     };
   },
   computed: {
     invalidForm() {
       return !this.name || !this.email || !this.password || !this.isEmailValid;
-    }
+    },
   },
   created() {
-    this.rPath = this.$route.query.rPath || "/";
+    this.rPath = this.$route.query.rPath || '/';
   },
   methods: {
-    ...mapActions(["REGISTER", "CHECK_EMAIL"]),
+    ...mapActions(['REGISTER', 'CHECK_EMAIL']),
     // Email창에서 focus가 없어질 때, email 중복에 대해 체크
     onEmailBlur() {
       this.CHECK_EMAIL({ email: this.email })
@@ -79,16 +79,16 @@ export default {
       this.REGISTER({
         name: this.name,
         email: this.email,
-        password: this.password
+        password: this.password,
       })
         .then(data => {
-          this.$router.push("/");
+          this.$router.push('/');
         })
         .catch(err => {
           this.error = err.response.data.error;
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

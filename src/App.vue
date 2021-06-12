@@ -3,13 +3,13 @@
     <v-app>
       <Navbar />
       <router-view></router-view>
-    </v-app>
+    </v-app> 
   </div>
 </template>
 
 <script>
 import Navbar from "./components/Navbar.vue";
-
+ 
 export default {
   name: "app",
   components: { Navbar },
@@ -20,6 +20,7 @@ export default {
 </script>
 
 <style>
+
 .delete-card-btn {
   position: absolute;
   right: 10px;
@@ -33,23 +34,8 @@ export default {
   text-decoration: none;
 }
 
-a {
+.a {
   text-decoration: none;
 }
 
-h2 {
-  font-size: 1.6rem;
-}
-
-h3 {
-  font-size: 1.4rem;
-}
-
-h4 {
-  font-size: 1.2rem;
-}
-
-h5 {
-  font-size: 1rem;
-}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <v-main>
+  <v-main>  
     <v-container class="login-box">
       <v-layout>
         <v-flex elevation-4>

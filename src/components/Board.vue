@@ -1,6 +1,6 @@
 <template>
   <v-main class="body">
-    <div class="board-wrapper ">
+    <div class="board-wrapper">
       <div class="board">
         <div class="board-header">
           <v-btn plain color="black" class="title-btn">
@@ -51,19 +51,19 @@ export default {
       drakeList: null,
       drake: null,
       isEditTitle: false,
-      inputTitle: ""
+      inputTitle: "",
     };
   },
   watch: {
     $route() {
       this.fetchData();
-    }
+    },
   },
   computed: {
     ...mapState({
       board: "board",
-      isShowBoardMenu: "isShowBoardMenu"
-    })
+      isShowBoardMenu: "isShowBoardMenu",
+    }),
   },
   created() {
     this.fetchData().then(_ => {
@@ -80,11 +80,11 @@ export default {
       invalid: (el, handle) => {
         console.log(handle.className);
         return !/^list/.test(handle.className);
-      }
+      },
     }).on("drop", (el, wrapper, target, siblings) => {
       const targetList = {
         id: el.children[0].dataset.listId * 1,
-        pos: 65535
+        pos: 65535,
       };
       let prevList = null;
       let nextList = null;
@@ -96,14 +96,14 @@ export default {
           idx > 0
             ? {
                 id: arr[idx - 1].dataset.listId * 1,
-                pos: arr[idx - 1].dataset.listPos * 1
+                pos: arr[idx - 1].dataset.listPos * 1,
               }
             : null;
         nextList =
           idx < arr.length - 1
             ? {
                 id: arr[idx + 1].dataset.listId * 1,
-                pos: arr[idx + 1].dataset.listPos * 1
+                pos: arr[idx + 1].dataset.listPos * 1,
               }
             : null;
       });
@@ -119,7 +119,7 @@ export default {
         const targetCard = {
           id: el.dataset.cardId,
           listId: wrapper.dataset.listId,
-          pos: 65535
+          pos: 65535,
         };
         let prevCard = null;
         let nextCard = null;
@@ -133,18 +133,18 @@ export default {
                 idx > 0
                   ? {
                       id: arr[idx - 1].dataset.cardId,
-                      pos: arr[idx - 1].dataset.cardPos * 1
+                      pos: arr[idx - 1].dataset.cardPos * 1,
                     }
                   : null;
               nextCard =
                 idx < arr.length - 1
                   ? {
                       id: arr[idx + 1].dataset.cardId,
-                      pos: arr[idx + 1].dataset.cardPos * 1
+                      pos: arr[idx + 1].dataset.cardPos * 1,
                     }
                   : null;
             }
-          }
+          },
         );
 
         if (!prevCard && nextCard) targetCard.pos = nextCard.pos / 2;
@@ -153,7 +153,7 @@ export default {
           targetCard.pos = (prevCard.pos + nextCard.pos) / 2;
 
         this.UPDATE_CARD(targetCard);
-      }
+      },
     );
   },
   methods: {
@@ -161,7 +161,7 @@ export default {
       "FETCH_BOARD",
       "UPDATE_BOARD",
       "UPDATE_CARD",
-      "UPDATE_LIST"
+      "UPDATE_LIST",
     ]),
     ...mapMutations(["SET_THEME"]),
     fetchData() {
@@ -180,8 +180,8 @@ export default {
       if (title === this.board.title) return (this.isEditTitle = false);
 
       this.UPDATE_BOARD({ id, title }).then(_ => (this.isEditTitle = false));
-    }
-  }
+    },
+  },
 };
 </script>
 
