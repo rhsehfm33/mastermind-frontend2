@@ -12,14 +12,17 @@
           ref="inputTitle"
         />
       </div>
-      <v-btn plain color="blue" @click.prevent="onClickClose">&times;</v-btn>
+      <v-btn plain x-large color="blue" @click.prevent="onClickClose"
+        >&times;</v-btn
+      >
     </div>
     <div slot="body">
       <h3>Description</h3>
       <v-textarea
+        solo
         cols="30"
         rows="5"
-        placeholder="Add a description..."
+        placeholder="설명을 추가해보세요!"
         :readonly="!toggleDesc"
         @click.prevent="toggleDesc = !toggleDesc"
         @blur="onBlurInputDesc"
@@ -41,13 +44,13 @@ export default {
   data() {
     return {
       toggleTitle: false,
-      toggleDesc: false
+      toggleDesc: false,
     };
   },
   computed: {
     ...mapState({
-      card: "card"
-    })
+      card: "card",
+    }),
   },
   created() {
     this.FETCH_CARD(this.$route.params.cid);
@@ -68,15 +71,15 @@ export default {
       const description = this.$refs.inputDesc.value.trim();
       if (!description) return;
       this.UPDATE_CARD({ id: this.card.id, description });
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style>
 .modal-card .modal-container {
   min-width: 300px;
-  max-width: 800px;
+  max-width: 500px;
   width: 60%;
 }
 

@@ -91,6 +91,7 @@ export default {
 .header {
   position: relative;
   font-weight: bold;
+  opacity: 0.8;
 }
 .header a {
   text-decoration: none;
