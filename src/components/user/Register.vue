@@ -40,18 +40,18 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
 
 export default {
   data() {
     return {
-      SignUpTitle: 'Sign up',
-      DuplicatedEmail: 'Email has been already used',
-      name: '',
-      email: '',
-      password: '',
-      error: '',
-      rPath: '',
+      SignUpTitle: "Sign up",
+      DuplicatedEmail: "Email has been already used",
+      name: "",
+      email: "",
+      password: "",
+      error: "",
+      rPath: "",
       isEmailValid: true, // 입력된 이메일이 이미 사용됐으면 false, 그렇지 않으면 true
     };
   },
@@ -61,10 +61,10 @@ export default {
     },
   },
   created() {
-    this.rPath = this.$route.query.rPath || '/';
+    this.rPath = this.$route.query.rPath || "/";
   },
   methods: {
-    ...mapActions(['REGISTER', 'CHECK_EMAIL']),
+    ...mapActions(["REGISTER", "CHECK_EMAIL"]),
     // Email창에서 focus가 없어질 때, email 중복에 대해 체크
     onEmailBlur() {
       this.CHECK_EMAIL({ email: this.email })
@@ -82,7 +82,7 @@ export default {
         password: this.password,
       })
         .then(data => {
-          this.$router.push('/');
+          this.$router.push("/");
         })
         .catch(err => {
           this.error = err.response.data.error;
@@ -94,7 +94,7 @@ export default {
 
 <style>
 .sign-up-box {
-  width: 450px;
+  width: 500px;
   margin-top: 50px;
   text-align: center;
 }

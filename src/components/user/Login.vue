@@ -74,7 +74,7 @@ export default {
 
 <style>
 .login-box {
-  width: 450px;
+  width: 500px;
   margin-top: 50px;
   text-align: center;
 }

@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <v-app-bar class="header">
+    <v-app-bar class="header" elevation="4">
       <v-btn v-if="isNewBoardValid" @click.prevent="onClickCreateBoard"
         >+ New Board</v-btn
       >
@@ -8,13 +8,13 @@
         >Show Menu</v-btn
       >
       <v-spacer></v-spacer>
-      <v-toolbar-title
+      <v-toolbar-title class="header-logo"
         ><router-link to="/">{{ appTitle }}</router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <div class="header-auth">
         <a v-if="isAuthenicated" href="" @click.prevent="logout">Logout</a>
-        <template v-else>
+        <template v-else class="header-auth">
           <router-link to="/login" class="user-nav-btn">Login</router-link>
           <router-link to="/register" class="user-nav-btn">Sign Up</router-link>
         </template>
@@ -89,6 +89,7 @@ export default {
 
 <style>
 .header {
+  position: relative;
   font-weight: bold;
 }
 .header a {
@@ -101,5 +102,15 @@ export default {
 }
 .user-nav-btn {
   padding-left: 10px;
+}
+
+.header-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.header-auth {
+  float: right;
 }
 </style>
