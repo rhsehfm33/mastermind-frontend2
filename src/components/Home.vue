@@ -1,6 +1,6 @@
 <template>
   <v-main>
-    <v-container>
+    <v-container align="center" justify="center">
       <v-row>
         <v-col v-for="(board, i) in boardList" :key="i" cols="4">
           <router-link class="router-link" :to="`/board/${board.id}`">
@@ -31,8 +31,8 @@ export default {
   computed: {
     ...mapState({
       isAddBoard: "isAddBoard",
-      boardList: "boardList"
-    })
+      boardList: "boardList",
+    }),
   },
   created() {
     this.FETCH_BOARD_LIST();
@@ -45,7 +45,13 @@ export default {
   },
   methods: {
     ...mapMutations(["SET_IS_ADD_BOARD", "SET_THEME"]),
-    ...mapActions(["FETCH_BOARD_LIST"])
-  }
+    ...mapActions(["FETCH_BOARD_LIST"]),
+  },
 };
 </script>
+
+<style scoped>
+.board-item {
+  margin: 10px;
+}
+</style>

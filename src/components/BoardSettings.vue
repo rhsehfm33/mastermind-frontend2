@@ -6,7 +6,7 @@
     </div>
     <ul class="menu-list">
       <li><a href="" @click.prevent="onClickDeleteBoard">Delete Board</a></li>
-      <li>Change Background</li>
+      <li>Change Theme</li>
       <div class="color-picker">
         <a
           href=""

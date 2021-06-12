@@ -1,6 +1,6 @@
 <template>
-  <v-main>
-    <div class="board-wrapper body">
+  <v-main class="body">
+    <v-container class="board-wrapper">
       <div class="board">
         <div class="board-header">
           <v-btn plain color="black" class="title-btn">
@@ -29,10 +29,12 @@
             </div>
           </div>
         </div>
-        <board-settings v-if="isShowBoardMenu" />
-        <router-view :boardId="board.id"></router-view>
+        <div>
+          <board-settings v-if="isShowBoardMenu" />
+          <router-view :boardId="board.id"></router-view>
+        </div>
       </div>
-    </div>
+    </v-container>
   </v-main>
 </template>
 
@@ -58,12 +60,14 @@ export default {
     $route() {
       this.fetchData();
     },
+    navbarColor: "updateTheme",
     bodyColor: "updateTheme",
   },
   computed: {
     ...mapState({
       board: "board",
       isShowBoardMenu: "isShowBoardMenu",
+      navbarColor: "navbarColor",
       bodyColor: "bodyColor",
     }),
   },
@@ -191,7 +195,7 @@ export default {
       const body = document.querySelector(".body");
       // body가 없으면 return, 있으면 배경화면에 bodyColor 값 대입
       if (!body) return;
-      body.style.backgroundColor = this.bodyColor;
+      else body.style.backgroundColor = this.navbarColor;
     },
   },
 };

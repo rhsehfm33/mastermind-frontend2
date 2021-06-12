@@ -68,10 +68,10 @@ export default {
   methods: {
     ...mapMutations(["SET_IS_ADD_BOARD", "SET_IS_SHOW_BOARD_MENU"]),
     updateTheme() {
-      const body = document.querySelector(".header");
+      const header = document.querySelector(".header");
       // body가 없으면 return, 있으면 배경화면에 bodyColor 값 대입
-      if (!body) return;
-      body.style.backgroundColor = this.navbarColor;
+      if (!header) return;
+      header.style.backgroundColor = this.navbarColor;
     },
     logout() {
       this.$store.commit("LOGOUT");

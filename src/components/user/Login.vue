@@ -1,5 +1,5 @@
 <template>
-  <v-main>  
+  <v-main>
     <v-container class="login-box">
       <v-layout>
         <v-flex elevation-4>
@@ -26,7 +26,9 @@
                 >Login</v-btn
               >
             </v-form>
-            <p v-if="error" style="color:red">{{ error }}</p>
+            <div class="error-wrapper">
+              <p v-if="error" style="color: red">{{ error }}</p>
+            </div>
           </v-card>
         </v-flex>
       </v-layout>
@@ -44,13 +46,13 @@ export default {
       email: "",
       password: "",
       error: "",
-      rPath: ""
+      rPath: "",
     };
   },
   computed: {
     invalidForm() {
       return !this.email || !this.password;
-    }
+    },
   },
   created() {
     this.rPath = this.$route.query.rPath || "/";
@@ -65,8 +67,8 @@ export default {
         .catch(err => {
           this.error = err.response.data.error;
         });
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -79,5 +81,9 @@ export default {
 
 .login-card {
   padding: 30px;
+}
+
+.error-wrapper {
+  margin: 10px;
 }
 </style>
