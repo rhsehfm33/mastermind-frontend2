@@ -1,6 +1,6 @@
 <template>
-  <v-main class="body">
-    <v-container class="board-wrapper">
+  <v-main>
+    <div class="board-wrapper body">
       <div class="board">
         <div class="board-header">
           <v-btn plain color="black" class="title-btn">
@@ -34,7 +34,7 @@
           <router-view :boardId="board.id"></router-view>
         </div>
       </div>
-    </v-container>
+    </div>
   </v-main>
 </template>
 
