@@ -71,7 +71,7 @@ export default {
       const body = document.querySelector(".header");
       // body가 없으면 return, 있으면 배경화면에 bodyColor 값 대입
       if (!body) return;
-      body.style.backgroundColor = this.bodyColor;
+      body.style.backgroundColor = this.navbarColor;
     },
     logout() {
       this.$store.commit("LOGOUT");
