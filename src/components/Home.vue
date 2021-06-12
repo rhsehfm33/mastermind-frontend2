@@ -2,6 +2,7 @@
   <v-main>
     <v-container align="center" justify="center">
       <v-row>
+        <!--  -->
         <v-col v-for="(board, i) in boardList" :key="i" cols="4">
           <router-link class="router-link" :to="`/board/${board.id}`">
             <v-card

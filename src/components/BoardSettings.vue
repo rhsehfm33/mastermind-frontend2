@@ -53,10 +53,12 @@ export default {
     onClickClose() {
       this.SET_IS_SHOW_BOARD_MENU(false);
     },
+    // 보드 삭제
     onClickDeleteBoard() {
-      if (!confirm(`Delete ${this.board.title} Board?`)) return;
+      if (!confirm(`${this.board.title} 보드를 삭제하시나요?`)) return;
       this.DELETE_BOARD(this.board.id).then(_ => this.$router.push("/"));
     },
+    // 색상 변경
     onClickChangeColor(el) {
       // board의 id 값을 가져온다.
       const id = this.board.id;

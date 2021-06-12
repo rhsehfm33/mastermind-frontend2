@@ -15,6 +15,7 @@
             <h2 v-else @click="onClickTitle">{{ board.title }}</h2>
           </v-btn>
         </div>
+        <!-- list 컴포넌트  -->
         <div class="list-section-wrapper">
           <div class="list-section">
             <div
@@ -22,8 +23,10 @@
               v-for="list in board.lists"
               :key="list.pos"
             >
+              <!-- list 데이터를 바인딩해서 list 컴포넌트 출력 -->
               <list :list="list"></list>
             </div>
+            <!-- AddList 컴포넌트 사용하여 리스트 추가 -->
             <div class="list-wrapper">
               <add-list />
             </div>
@@ -31,6 +34,7 @@
         </div>
         <div>
           <board-settings v-if="isShowBoardMenu" />
+          <!-- 중첩 라우팅으로 board 컴포넌트 내에 card 컴포넌트가 출력 -->
           <router-view :boardId="board.id"></router-view>
         </div>
       </div>
@@ -63,6 +67,7 @@ export default {
     navbarColor: "updateTheme",
     bodyColor: "updateTheme",
   },
+  // mapState 함수 호출
   computed: {
     ...mapState({
       board: "board",
@@ -76,9 +81,9 @@ export default {
     this.updateTheme();
   },
   created() {
+    // create 되면 테마 컬러 전달
     this.fetchData().then(_ => {
       this.inputTitle = this.board.title;
-      // 테마 컬러 전달
       this.SET_THEME(this.board.bgColor);
     });
   },
@@ -87,11 +92,11 @@ export default {
     if (this.drake) this.drake.destroy();
 
     this.drakeList = dragula([...this.$el.querySelectorAll(".list-section")], {
-      invalid: (el, handle) => {
+      invalid: handle => {
         console.log(handle.className);
         return !/^list/.test(handle.className);
       },
-    }).on("drop", (el, wrapper, target, siblings) => {
+    }).on("drop", (el, wrapper) => {
       const targetList = {
         id: el.children[0].dataset.listId,
         pos: 65535,
@@ -125,7 +130,7 @@ export default {
     });
     this.drake = dragula([...this.$el.querySelectorAll(".card-list")]).on(
       "drop",
-      (el, wrapper, target, silblings) => {
+      (el, wrapper) => {
         const targetCard = {
           id: el.dataset.cardId,
           listId: wrapper.dataset.listId,
@@ -177,20 +182,21 @@ export default {
     fetchData() {
       return this.FETCH_BOARD(this.$route.params.id);
     },
+    // 보드 제목 수정
     onClickTitle() {
       this.isEditTitle = true;
       this.$nextTick(_ => this.$refs.inputTitle.focus());
     },
+    // 보드 제목 수정할 때 제출하는 이벤트
     onTitleSubmit() {
       this.inputTitle = this.inputTitle.trim();
       if (!this.inputTitle) return;
       const id = this.board.id;
       const title = this.inputTitle;
-
       if (title === this.board.title) return (this.isEditTitle = false);
-
       this.UPDATE_BOARD({ id, title }).then(_ => (this.isEditTitle = false));
     },
+    // 보드 색상 변경
     updateTheme() {
       const body = document.querySelector(".body");
       // body가 없으면 return, 있으면 배경화면에 bodyColor 값 대입

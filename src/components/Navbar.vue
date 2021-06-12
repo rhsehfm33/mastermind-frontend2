@@ -61,25 +61,28 @@ export default {
     },
     bodyColor: "updateTheme",
   },
+  // mount 됐을 때 Theme를 업데이트하는 작업
   mounted() {
-    // mount 됐을 때 Theme를 업데이트하는 작업
     this.updateTheme();
   },
   methods: {
     ...mapMutations(["SET_IS_ADD_BOARD", "SET_IS_SHOW_BOARD_MENU"]),
     updateTheme() {
       const header = document.querySelector(".header");
-      // body가 없으면 return, 있으면 배경화면에 bodyColor 값 대입
+      // header값 없으면 return, 있으면 배경화면에 navbarColor 값 대입
       if (!header) return;
       header.style.backgroundColor = this.navbarColor;
     },
+    // 로그아웃
     logout() {
       this.$store.commit("LOGOUT");
       this.$router.push("/login");
     },
+    // 보드 생성
     onClickCreateBoard() {
       this.SET_IS_ADD_BOARD(true);
     },
+    // 보드 메뉴창
     onClickShowMenu() {
       this.SET_IS_SHOW_BOARD_MENU(true);
     },

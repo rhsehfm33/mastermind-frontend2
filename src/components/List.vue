@@ -17,7 +17,6 @@
         >&times;</a
       >
     </div>
-
     <div class="card-list" :data-list-id="list.id">
       <div v-show="!list.cards.length" class="empty-card-item"></div>
       <card-item
@@ -27,6 +26,7 @@
         :boardId="list.boardId"
       ></card-item>
     </div>
+    <!-- isAddCard 상태가 true일 경우 보여주고 close 이벤트가 오면 false로 변경 -->
     <div v-if="isAddCard">
       <add-card
         :pos="lastCardPos"
@@ -34,6 +34,7 @@
         @close="isAddCard = false"
       ></add-card>
     </div>
+    <!-- isAddCard 상태가 false일 경우 카드 생성 버튼 -->
     <v-btn plain v-else @click.prevent="isAddCard = true">
       &plus; Add a card!
     </v-btn>
@@ -47,6 +48,7 @@ import { mapActions } from "vuex";
 
 export default {
   components: { CardItem, AddCard },
+  // 부모 컴포넌트로부터 list라는 데이터 받음
   props: ["list"],
   data() {
     return {
@@ -83,7 +85,7 @@ export default {
       this.UPDATE_LIST({ id, title }).then(_ => (this.isEditTitle = false));
     },
     onDeleteList() {
-      if (!confirm(`Delete ${this.list.title} list?`)) return;
+      if (!confirm(`${this.list.title} 리스트를 삭제하시나요?`)) return;
       this.DELETE_LIST({ id: this.list.id });
     },
   },

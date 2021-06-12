@@ -1,12 +1,14 @@
 import { setAuthInHeader } from "../api";
 
 const mutations = {
+  // 로그인
   LOGIN(state, { accessToken }) {
     if (!accessToken) return;
     state.accessToken = accessToken;
     localStorage.accessToken = accessToken;
     setAuthInHeader(accessToken);
   },
+  // 로그아웃
   LOGOUT(state) {
     state.accessToken = null;
     delete localStorage.accessToken;
@@ -24,9 +26,11 @@ const mutations = {
   SET_CARD(state, card) {
     state.card = card;
   },
+  // 보드 메뉴 사이드바
   SET_IS_SHOW_BOARD_MENU(state, toggle) {
     state.isShowBoardMenu = toggle;
   },
+  // 테마 변경
   SET_THEME(state, color) {
     // 배경화면 색깔 : bodyColor 상태에 color가 들어오면 color로, 아니면 하얀색 기본값으로 변경
     state.bodyColor = color ? color : "rgb(255,255,255)";

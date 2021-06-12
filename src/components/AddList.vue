@@ -1,5 +1,6 @@
 <template>
   <v-card class="list add-list">
+    <!-- isAddList 상태 토글 여부에 따라 출력 -->
     <v-text-field
       v-if="isAddList"
       outlined
@@ -20,13 +21,13 @@ export default {
   data() {
     return {
       isAddList: false,
-      inputTitle: ""
+      inputTitle: "",
     };
   },
   computed: {
     ...mapState({
-      board: "board"
-    })
+      board: "board",
+    }),
   },
   methods: {
     ...mapActions(["ADD_LIST"]),
@@ -49,20 +50,20 @@ export default {
     resotre() {
       this.isAddList = false;
       this.inputTitle = "";
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
 .add-list {
-  background-color: rgba(0, 0, 0, 0.3);
+  opacity: 0.5;
   padding: 20px;
   text-decoration: none;
 }
 .add-list:hover,
 .add-list:focus {
-  background-color: rgba(0, 0, 0, 0.3);
+  opacity: 0.8;
   cursor: pointer;
 }
 </style>
