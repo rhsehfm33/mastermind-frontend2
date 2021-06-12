@@ -5,7 +5,7 @@
         <input
           class="form-control"
           type="text"
-          :value="card.title"
+          v-model="card.title"
           :readonly="!toggleTitle"
           @click.prevent="toggleTitle = !toggleTitle"
           @blur="onBlurTitle"
