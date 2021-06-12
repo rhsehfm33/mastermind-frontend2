@@ -1,7 +1,7 @@
-import axios from 'axios';
-import router from '../router';
+import axios from "axios";
+import router from "../router";
 
-const domain = 'http://localhost:3000';
+const domain = "http://localhost:3000";
 const Unauthorized = 401;
 const onUnauthorized = () => {
   router.push(`/login?returnPath=${encodeURIComponent(location.pathname)}`);
@@ -27,20 +27,22 @@ const request = {
 };
 
 export const setAuthInHeader = token => {
-  axios.defaults.headers.common['Authorization'] = token ? `Bearer ${token}` : null;
+  axios.defaults.headers.common["Authorization"] = token
+    ? `Bearer ${token}`
+    : null;
 };
 
 export const auth = {
   login(email, password) {
-    return request.post('/login', { email, password }).then(({ data }) => data);
+    return request.post("/login", { email, password }).then(({ data }) => data);
   },
   // 이메일 중복 체크
   check_email(email) {
-    return request.post('/check_email', { email }).then(({ data }) => data);
+    return request.post("/check_email", { email }).then(({ data }) => data);
   },
   // 회원 가입
   register(name, email, password) {
-    return request.post('/register', { name, email, password });
+    return request.post("/register", { name, email, password });
   },
 };
 export const board = {
@@ -48,11 +50,12 @@ export const board = {
     if (id) {
       return request.get(`/boards/${id}`).then(({ data }) => data);
     }
-    return request.get('/boards').then(({ data }) => data);
+    return request.get("/boards").then(({ data }) => data);
   },
   create(title) {
-    return request.post('/boards', { title }).then(({ data }) => data);
+    return request.post("/boards", { title }).then(({ data }) => data);
   },
+  // 보드 색상 변경 api 요청
   update(id, data) {
     return request.put(`/boards/${id}`, data).then(({ data }) => data);
   },
@@ -78,7 +81,9 @@ export const card = {
     return request.get(`/cards/${id}`).then(({ data }) => data);
   },
   create({ title, listId, pos }) {
-    return request.post(`/cards`, { title, listId, pos }).then(({ data }) => data);
+    return request
+      .post(`/cards`, { title, listId, pos })
+      .then(({ data }) => data);
   },
   update(id, data) {
     return request.put(`/cards/${id}`, data).then(({ data }) => data);

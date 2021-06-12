@@ -38,9 +38,10 @@ import { mapState, mapMutations, mapActions } from "vuex";
 export default {
   computed: {
     ...mapState({
-      board: "board"
-    })
+      board: "board",
+    }),
   },
+  // 부모 컴포넌트에 붙어서 돔 조작이 가능한 시점
   mounted() {
     Array.from(this.$el.querySelectorAll(".color-picker a")).forEach(el => {
       el.style.backgroundColor = el.dataset.value;
@@ -57,18 +58,19 @@ export default {
       this.DELETE_BOARD(this.board.id).then(_ => this.$router.push("/"));
     },
     onClickChangeColor(el) {
+      // board의 id 값을 가져온다.
       const id = this.board.id;
+      // color-picker class를 가진 div 내에 a 태그의 data(색상값)를 bgColor에 대입한다.
       const bgColor = el.target.dataset.value;
+      // 변경된 배경 색상을 id값과 함께 api를 요청하여 서버로 전달한다. 완료되면 then 함수가 실행된다.
       this.UPDATE_BOARD({ id, bgColor }).then(_ => {
-        document.querySelector(
-          ".body"
-        ).style.backgroundColor = this.board.bgColor;
-        document.querySelector(
-          ".header"
-        ).style.backgroundColor = this.board.bgColor;
+        document.querySelector(".body").style.backgroundColor =
+          this.board.bgColor;
+        document.querySelector(".header").style.backgroundColor =
+          this.board.bgColor;
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

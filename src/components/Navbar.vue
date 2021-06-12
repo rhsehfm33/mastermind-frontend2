@@ -24,32 +24,32 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
-import AddBoard from './AddBoard.vue';
+import { mapState, mapMutations } from "vuex";
+import AddBoard from "./AddBoard.vue";
 
 export default {
   components: { AddBoard },
   data() {
     return {
-      appTitle: 'Mastermind',
-      rPath: '',
+      appTitle: "Mastermind",
+      rPath: "",
     };
   },
   computed: {
     ...mapState({
-      isAddBoard: 'isAddBoard',
-      isShowBoardMenu: 'isShowBoardMenu',
-      navbarColor: 'navbarColor',
-      bodyColor: 'bodyColor',
+      isAddBoard: "isAddBoard",
+      isShowBoardMenu: "isShowBoardMenu",
+      navbarColor: "navbarColor",
+      bodyColor: "bodyColor",
     }),
     isAuthenicated() {
       return this.$store.getters.isAuthenticated;
     },
     isNewBoardValid() {
-      return this.rPath === '/' && this.isAuthenicated;
+      return this.rPath === "/" && this.isAuthenicated;
     },
     isShowMenuValid() {
-      return this.rPath.includes('/board/') && this.isShowBoardMenu == false;
+      return this.rPath.includes("/board/") && this.isShowBoardMenu == false;
     },
   },
   created() {
@@ -59,24 +59,23 @@ export default {
     $route: function (to, from) {
       this.rPath = to.path;
     },
-    bodyColor: 'updateTheme',
+    bodyColor: "updateTheme",
   },
   mounted() {
     // mount 됐을 때 Theme를 업데이트하는 작업
     this.updateTheme();
   },
   methods: {
-    ...mapMutations(['SET_IS_ADD_BOARD', 'SET_IS_SHOW_BOARD_MENU']),
+    ...mapMutations(["SET_IS_ADD_BOARD", "SET_IS_SHOW_BOARD_MENU"]),
     updateTheme() {
-      this.$el.style.backgroundColor = this.navbarColor;
-      const body = document.querySelector('.header');
+      const body = document.querySelector(".header");
       // body가 없으면 return, 있으면 배경화면에 bodyColor 값 대입
       if (!body) return;
       body.style.backgroundColor = this.bodyColor;
     },
     logout() {
-      this.$store.commit('LOGOUT');
-      this.$router.push('/login');
+      this.$store.commit("LOGOUT");
+      this.$router.push("/login");
     },
     onClickCreateBoard() {
       this.SET_IS_ADD_BOARD(true);

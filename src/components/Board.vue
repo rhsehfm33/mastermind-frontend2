@@ -1,6 +1,6 @@
 <template>
-  <v-main class="body">
-    <div class="board-wrapper">
+  <v-main>
+    <div class="board-wrapper body">
       <div class="board">
         <div class="board-header">
           <v-btn plain color="black" class="title-btn">
@@ -58,12 +58,18 @@ export default {
     $route() {
       this.fetchData();
     },
+    bodyColor: "updateTheme",
   },
   computed: {
     ...mapState({
       board: "board",
       isShowBoardMenu: "isShowBoardMenu",
+      bodyColor: "bodyColor",
     }),
+  },
+  mounted() {
+    // mount 됐을 때 Theme를 업데이트하는 작업
+    this.updateTheme();
   },
   created() {
     this.fetchData().then(_ => {
@@ -180,6 +186,12 @@ export default {
       if (title === this.board.title) return (this.isEditTitle = false);
 
       this.UPDATE_BOARD({ id, title }).then(_ => (this.isEditTitle = false));
+    },
+    updateTheme() {
+      const body = document.querySelector(".body");
+      // body가 없으면 return, 있으면 배경화면에 bodyColor 값 대입
+      if (!body) return;
+      body.style.backgroundColor = this.bodyColor;
     },
   },
 };
