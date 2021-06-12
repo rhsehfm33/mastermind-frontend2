@@ -30,6 +30,7 @@ import AddBoard from "./AddBoard.vue";
 export default {
   components: { AddBoard },
   computed: {
+    // 상태 가져오기
     ...mapState({
       isAddBoard: "isAddBoard",
       boardList: "boardList",

@@ -56,6 +56,7 @@ export default {
   methods: {
     // 카드 생성하는 액션 함수
     ...mapActions(["ADD_CARD"]),
+    // 카드를 추가할 때 이전 카드 포지션 값 참고
     onSubmitNewCard() {
       if (this.invalidInput) return;
       const { inputCardTitle, pos, listId } = this;

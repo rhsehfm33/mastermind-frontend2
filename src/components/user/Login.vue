@@ -26,6 +26,7 @@
                 >Login</v-btn
               >
             </v-form>
+            <!-- 로그인 실패할 경우  -->
             <div class="error-wrapper">
               <p v-if="error" style="color: red">{{ error }}</p>
             </div>
@@ -50,6 +51,7 @@ export default {
     };
   },
   computed: {
+    // 공백 확인
     invalidForm() {
       return !this.email || !this.password;
     },

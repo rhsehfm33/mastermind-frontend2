@@ -24,6 +24,7 @@ export default {
       inputTitle: "",
     };
   },
+  // state 가져오기
   computed: {
     ...mapState({
       board: "board",
@@ -31,12 +32,14 @@ export default {
   },
   methods: {
     ...mapActions(["ADD_LIST"]),
+    // 리스트 제목 입력할 때 포커즈
     onClickAddList() {
       this.isAddList = true;
       this.$nextTick(_ => {
         this.$refs.inputTitle.focus();
       });
     },
+    // 리스트 제목 입력 후 제출
     onSubmitTitle() {
       this.inputTitle = this.inputTitle.trim();
       if (!this.inputTitle) return this.resotre();
@@ -47,6 +50,7 @@ export default {
       const boardId = this.board.id;
       this.ADD_LIST({ title, pos, boardId }).then(_ => this.resotre());
     },
+    // 초기화
     resotre() {
       this.isAddList = false;
       this.inputTitle = "";

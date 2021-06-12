@@ -70,10 +70,12 @@ export default {
   },
   methods: {
     ...mapActions(["UPDATE_LIST", "DELETE_LIST"]),
+    // 리스트 제목 클릭 이벤트
     onClickTitle() {
       this.isEditTitle = true;
       this.$nextTick(_ => this.$refs.inputTitle.focus());
     },
+    // 리스트 제목 수정
     onTitleSubmit() {
       this.inputTitle = this.inputTitle.trim();
       if (!this.inputTitle) return;
@@ -84,6 +86,7 @@ export default {
 
       this.UPDATE_LIST({ id, title }).then(_ => (this.isEditTitle = false));
     },
+    // 리스트 삭제
     onDeleteList() {
       if (!confirm(`${this.list.title} 리스트를 삭제하시나요?`)) return;
       this.DELETE_LIST({ id: this.list.id });

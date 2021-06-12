@@ -1,7 +1,7 @@
 import { setAuthInHeader } from "../api";
 
 const mutations = {
-  // 로그인
+  // 로그인 : 요청 헤더를 읽어서 할당
   LOGIN(state, { accessToken }) {
     if (!accessToken) return;
     state.accessToken = accessToken;
@@ -14,15 +14,19 @@ const mutations = {
     delete localStorage.accessToken;
     setAuthInHeader(null);
   },
+  // 모든 보드 목록 할당
   SET_BOARD_LIST(state, { list }) {
     state.boardList = list.map(board => board);
   },
+  // 보드 할당
   SET_BOARD(state, { item }) {
     state.board = item;
   },
+  // 보드 추가
   SET_IS_ADD_BOARD(state, toggle) {
     state.isAddBoard = toggle;
   },
+  // 카드 할당
   SET_CARD(state, card) {
     state.card = card;
   },

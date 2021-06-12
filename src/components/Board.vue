@@ -47,6 +47,7 @@ import { mapState, mapMutations, mapActions } from "vuex";
 import List from "./List.vue";
 import AddList from "./AddList.vue";
 import BoardSettings from "./BoardSettings.vue";
+// dragula 라이브러리
 import dragula from "dragula";
 import "dragula/dist/dragula.css";
 
@@ -88,6 +89,7 @@ export default {
     });
   },
   updated() {
+    // dragula drag & drop
     if (this.drakeList) this.drakeList.destroy();
     if (this.drake) this.drake.destroy();
 
@@ -96,7 +98,7 @@ export default {
         console.log(handle.className);
         return !/^list/.test(handle.className);
       },
-    }).on("drop", (el, wrapper) => {
+    }).on("drop", (el, wrapper, target, siblings) => {
       const targetList = {
         id: el.children[0].dataset.listId,
         pos: 65535,
@@ -128,6 +130,7 @@ export default {
         targetList.pos = (prevList.pos + nextList.pos) / 2;
       this.UPDATE_LIST(targetList);
     });
+    // 같은 리스트 내 카드 드래그 구현
     this.drake = dragula([...this.$el.querySelectorAll(".card-list")]).on(
       "drop",
       (el, wrapper) => {
@@ -138,12 +141,14 @@ export default {
         };
         let prevCard = null;
         let nextCard = null;
-
+        // 같은 리스트 내 카드 드랍 구현하기 위해 카드 배열 가져오기
         Array.from(wrapper.querySelectorAll(".card-item")).forEach(
           (el, idx, arr) => {
+            // 현재 카드 아이디 값 받아오기
             const cardId = el.dataset.cardId;
-
+            // 만약에 카드 아이디가 이동하고자 하는 카드 아이디라면
             if (targetCard.id === cardId) {
+              // 이전 카드
               prevCard =
                 idx > 0
                   ? {
@@ -151,22 +156,26 @@ export default {
                       pos: arr[idx - 1].dataset.cardPos * 1,
                     }
                   : null;
+              // 다음 카드
               nextCard =
                 idx < arr.length - 1
                   ? {
+                      // 마지막 카드가 아니라면
                       id: arr[idx + 1].dataset.cardId,
                       pos: arr[idx + 1].dataset.cardPos * 1,
                     }
-                  : null;
+                  : null; // 마지막 카드면 다음 카드는 없음
             }
           },
         );
-
+        // 이전 카드가 없고 다음 카드가 있다면 = 맨 앞에 있다면
         if (!prevCard && nextCard) targetCard.pos = nextCard.pos / 2;
+        // 맨 뒤 카드라면
         else if (!nextCard && prevCard) targetCard.pos = prevCard.pos * 2;
+        // 중간에 있는 카드라면
         else if (nextCard && prevCard)
           targetCard.pos = (prevCard.pos + nextCard.pos) / 2;
-
+        // 포지션 값을 전달
         this.UPDATE_CARD(targetCard);
       },
     );
