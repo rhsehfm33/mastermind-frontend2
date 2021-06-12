@@ -89,26 +89,26 @@ export default {
       },
     }).on("drop", (el, wrapper, target, siblings) => {
       const targetList = {
-        id: el.children[0].dataset.listId * 1,
+        id: el.children[0].dataset.listId,
         pos: 65535,
       };
       let prevList = null;
       let nextList = null;
       Array.from(wrapper.querySelectorAll(".list")).forEach((el, idx, arr) => {
         const listId = null;
-        const listFound = targetList.id === el.dataset.listId * 1;
+        const listFound = targetList.id === el.dataset.listId;
         if (!listFound) return;
         prevList =
           idx > 0
             ? {
-                id: arr[idx - 1].dataset.listId * 1,
+                id: arr[idx - 1].dataset.listId,
                 pos: arr[idx - 1].dataset.listPos * 1,
               }
             : null;
         nextList =
           idx < arr.length - 1
             ? {
-                id: arr[idx + 1].dataset.listId * 1,
+                id: arr[idx + 1].dataset.listId,
                 pos: arr[idx + 1].dataset.listPos * 1,
               }
             : null;
