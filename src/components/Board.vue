@@ -90,14 +90,17 @@ export default {
   },
   updated() {
     // dragula drag & drop
+    // destroy() 함수를 통해 불필요한 객체 삭제
     if (this.drakeList) this.drakeList.destroy();
     if (this.drake) this.drake.destroy();
 
+    // 객체 생성
     this.drakeList = dragula([...this.$el.querySelectorAll(".list-section")], {
       invalid: handle => {
         console.log(handle.className);
         return !/^list/.test(handle.className);
       },
+      // 리스트 드래그 구현
     }).on("drop", (el, wrapper, target, siblings) => {
       const targetList = {
         id: el.children[0].dataset.listId,
@@ -105,10 +108,14 @@ export default {
       };
       let prevList = null;
       let nextList = null;
+      // 리스트 배열 가져오기
       Array.from(wrapper.querySelectorAll(".list")).forEach((el, idx, arr) => {
         const listId = null;
+        // 현재 리스트 아이디 값 받기
         const listFound = targetList.id === el.dataset.listId;
+        // 만약에 리스트 아이디가 없다면 반환
         if (!listFound) return;
+        // 이전 리스트
         prevList =
           idx > 0
             ? {
@@ -116,16 +123,21 @@ export default {
                 pos: arr[idx - 1].dataset.listPos * 1,
               }
             : null;
+        // 다음 리스트
         nextList =
           idx < arr.length - 1
             ? {
+                // 마지막 리스트가 아니라면
                 id: arr[idx + 1].dataset.listId,
                 pos: arr[idx + 1].dataset.listPos * 1,
               }
-            : null;
+            : null; // 마지막 리스트면 다음 리스트는 없음
       });
+      // 리스트가 맨 앞에 있으면
       if (!prevList && nextList) targetList.pos = nextList.pos / 2;
+      // 리스트가 맨 뒤에 있으면
       else if (!nextList && prevList) targetList.pos = prevList.pos * 2;
+      // 중간에 있는 리스트일 경우
       else if (nextList && prevList)
         targetList.pos = (prevList.pos + nextList.pos) / 2;
       this.UPDATE_LIST(targetList);
