@@ -5,6 +5,7 @@
         <div class="board-header">
           <v-btn plain color="black" class="title-btn">
             <input
+              style="color: white"
               class="board-title-form"
               v-if="isEditTitle"
               v-model="inputTitle"

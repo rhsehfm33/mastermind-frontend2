@@ -1,5 +1,5 @@
 {
-  "parser": "babel-eslint",
+  "parser": "babel",
   "plugins": ["prettier"],
   "extends": ["eslint:recommended", "plugin:prettier/recommended"],
   "rules": {

@@ -10,12 +10,12 @@
       <div class="color-picker">
         <a
           href=""
-          data-value="rgb(0, 121, 191)"
+          data-value="rgb(70, 37, 219)"
           @click.prevent="onClickChangeColor"
         ></a>
         <a
           href=""
-          data-value="rgb(210, 144, 52)"
+          data-value="rgb(219, 199, 15)"
           @click.prevent="onClickChangeColor"
         ></a>
         <a
@@ -25,7 +25,7 @@
         ></a>
         <a
           href=""
-          data-value="rgb(176, 70, 50)"
+          data-value="rgb(219, 40, 4)"
           @click.prevent="onClickChangeColor"
         ></a>
       </div>

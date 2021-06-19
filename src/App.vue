@@ -20,6 +20,10 @@ export default {
 </script>
 
 <style>
+h2 {
+  color: #fff;
+}
+
 .delete-card-btn {
   position: absolute;
   right: 10px;
