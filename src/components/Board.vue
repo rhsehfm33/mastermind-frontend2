@@ -107,45 +107,32 @@ export default {
         id: el.children[0].dataset.listId,
         pos: 65535,
       };
-      let prevList = null;
-      let nextList = null;
+      let prevListPos = null;
+      let nextListPos = null;
+
       // 리스트 배열 가져오기
       Array.from(wrapper.querySelectorAll(".list")).forEach((el, idx, arr) => {
-        const listId = null;
-        // 현재 리스트 아이디 값 받기
-        const listFound = targetList.id === el.dataset.listId;
-        // 만약에 리스트 아이디가 없다면 반환
-        if (!listFound) return;
-        // 이전 리스트
-        prevList =
-          idx > 0
-            ? {
-                id: arr[idx - 1].dataset.listId,
-                pos: arr[idx - 1].dataset.listPos * 1,
-              }
-            : null;
-        // 다음 리스트
-        nextList =
-          idx < arr.length - 2
-            ? {
-                // 마지막 리스트가 아니라면
-                id: arr[idx + 1].dataset.listId,
-                pos: arr[idx + 1].dataset.listPos * 1,
-              }
-            : null; // 마지막 리스트면 다음 리스트는 없음
+        const listId = el.dataset.listId;
+        // 찾으려는 리스트가 있다면
+        if (targetList.id == listId) {
+          prevListPos = idx > 0 ? arr[idx - 1].dataset.listPos * 1 : null;  // 이전 리스트
+          nextListPos = idx < arr.length - 2 ? arr[idx + 1].dataset.listPos * 1 : null; // 다음 리스트
+        }
       });
+
       // 리스트가 맨 앞에 있으면
-      if (!prevList && nextList) {
-        targetList.pos = nextList.pos / 2;
+      if (!prevListPos && nextListPos) {
+        targetList.pos = nextListPos / 2;
       }
       // 리스트가 맨 뒤에 있으면
-      else if (!nextList && prevList) {
-        targetList.pos = prevList.pos * 2;
+      else if (prevListPos && !nextListPos) {
+        targetList.pos = prevListPos * 2;
       }
       // 중간에 있는 리스트일 경우
-      else if (nextList && prevList) {
-        targetList.pos = (prevList.pos + nextList.pos) / 2;
+      else if (prevListPos && nextListPos) {
+        targetList.pos = (prevListPos + nextListPos) / 2;
       }
+
       this.UPDATE_LIST(targetList);
     });
     // 카드 드래그 구현 : 컨테이너를 배열로 반환해야 함
@@ -159,8 +146,9 @@ export default {
           listId: wrapper.dataset.listId,
           pos: 65535,
         };
-        let prevCard = null;
-        let nextCard = null;
+        let prevCardPos = null;
+        let nextCardPos = null;
+
         // 카드 드랍 구현하기 위해 카드 배열 가져오기
         Array.from(wrapper.querySelectorAll(".card-item")).forEach(
           (el, idx, arr) => {
@@ -168,36 +156,25 @@ export default {
             const cardId = el.dataset.cardId;
             // 만약에 카드 아이디가 이동하고자 하는 카드 아이디라면
             if (targetCard.id === cardId) {
-              // 이전 카드
-              prevCard =
-                idx > 0
-                  ? {
-                      pos: arr[idx - 1].dataset.cardPos * 1,
-                    }
-                  : null;
-              // 다음 카드
-              nextCard =
-                idx < arr.length - 1
-                  ? {
-                      // 마지막 카드가 아니라면
-                      pos: arr[idx + 1].dataset.cardPos * 1,
-                    }
-                  : null; // 마지막 카드면 다음 카드는 없음
+              prevCardPos = idx > 0 ? arr[idx - 1].dataset.cardPos * 1 : null; // 이전 카드
+              nextCardPos = idx < arr.length - 1 ? arr[idx + 1].dataset.cardPos * 1 : null; // 다음 카드
             }
           },
         );
+
         // 이전 카드가 없고 다음 카드가 있다면 = 맨 앞에 있다면
-        if (!prevCard && nextCard) {
-          targetCard.pos = nextCard.pos / 2;
+        if (!prevCardPos && nextCardPos) {
+          targetCard.pos = nextCardPos / 2;
         }
         // 맨 뒤 카드라면
-        else if (!nextCard && prevCard) {
-          targetCard.pos = prevCard.pos * 2;
+        else if (prevCardPos && !nextCardPos) {
+          targetCard.pos = prevCardPos * 2;
         }
         // 중간에 있는 카드라면
-        else if (nextCard && prevCard) {
-          targetCard.pos = (prevCard.pos + nextCard.pos) / 2;
+        else if (prevCardPos && nextCardPos) {
+          targetCard.pos = (prevCardPos + nextCardPos) / 2;
         }
+        
         // 포지션 값을 전달
         this.UPDATE_CARD(targetCard);
       },
