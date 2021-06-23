@@ -126,7 +126,7 @@ export default {
             : null;
         // 다음 리스트
         nextList =
-          idx < arr.length - 1
+          idx < arr.length - 2
             ? {
                 // 마지막 리스트가 아니라면
                 id: arr[idx + 1].dataset.listId,
