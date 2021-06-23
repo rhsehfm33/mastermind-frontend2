@@ -4,10 +4,13 @@ import router from "../router";
 const domain = "http://localhost:3000";
 const Unauthorized = 401;
 const onUnauthorized = () => {
-  router.push(`/users/login?returnPath=${encodeURIComponent(location.pathname)}`);
+  router.push(
+    `/users/login?returnPath=${encodeURIComponent(location.pathname)}`,
+  );
 };
 
 const request = {
+  // axios.get(url[, config])
   get(path) {
     return axios.get(`${domain + path}`).catch(({ response }) => {
       const { status } = response;
@@ -15,18 +18,22 @@ const request = {
       throw Error(response);
     });
   },
+  // axios.post(url[, data[, config]])
   post(path, data) {
     return axios.post(`${domain + path}`, data);
   },
+  // axios.delete(url[, config])
   delete(path) {
     return axios.delete(`${domain + path}`);
   },
+  // axios.put(url[, data[, config]])
   put(path, data) {
     return axios.put(`${domain + path}`, data);
   },
 };
 // 인증 API
 export const setAuthInHeader = token => {
+  // 인스턴스가 생성 된 후 기본값 변경
   axios.defaults.headers.common["Authorization"] = token
     ? `Bearer ${token}`
     : null;
@@ -34,11 +41,15 @@ export const setAuthInHeader = token => {
 // 로그인 & 회원가입 API
 export const auth = {
   login(email, password) {
-    return request.post("/users/login", { email, password }).then(({ data }) => data);
+    return request
+      .post("/users/login", { email, password })
+      .then(({ data }) => data);
   },
   // 이메일 중복 체크
   check_email(email) {
-    return request.post("/users/check_email", { email }).then(({ data }) => data);
+    return request
+      .post("/users/check_email", { email })
+      .then(({ data }) => data);
   },
   // 회원 가입
   register(name, email, password) {

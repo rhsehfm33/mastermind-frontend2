@@ -135,17 +135,24 @@ export default {
             : null; // 마지막 리스트면 다음 리스트는 없음
       });
       // 리스트가 맨 앞에 있으면
-      if (!prevList && nextList) targetList.pos = nextList.pos / 2;
+      if (!prevList && nextList) {
+        targetList.pos = nextList.pos / 2;
+      }
       // 리스트가 맨 뒤에 있으면
-      else if (!nextList && prevList) targetList.pos = prevList.pos * 2;
+      else if (!nextList && prevList) {
+        targetList.pos = prevList.pos * 2;
+      }
       // 중간에 있는 리스트일 경우
-      else if (nextList && prevList)
+      else if (nextList && prevList) {
         targetList.pos = (prevList.pos + nextList.pos) / 2;
+      }
       this.UPDATE_LIST(targetList);
     });
     // 카드 드래그 구현 : 컨테이너를 배열로 반환해야 함
     this.drake = dragula([...this.$el.querySelectorAll(".card-list")]).on(
       "drop",
+      // el: 드래그하고 있는 요소
+      // target: el이 드래그 후 놓아진 리스트 요소
       (el, wrapper) => {
         const targetCard = {
           id: el.dataset.cardId,
@@ -165,7 +172,6 @@ export default {
               prevCard =
                 idx > 0
                   ? {
-                      id: arr[idx - 1].dataset.cardId,
                       pos: arr[idx - 1].dataset.cardPos * 1,
                     }
                   : null;
@@ -174,7 +180,6 @@ export default {
                 idx < arr.length - 1
                   ? {
                       // 마지막 카드가 아니라면
-                      id: arr[idx + 1].dataset.cardId,
                       pos: arr[idx + 1].dataset.cardPos * 1,
                     }
                   : null; // 마지막 카드면 다음 카드는 없음
@@ -182,12 +187,17 @@ export default {
           },
         );
         // 이전 카드가 없고 다음 카드가 있다면 = 맨 앞에 있다면
-        if (!prevCard && nextCard) targetCard.pos = nextCard.pos / 2;
+        if (!prevCard && nextCard) {
+          targetCard.pos = nextCard.pos / 2;
+        }
         // 맨 뒤 카드라면
-        else if (!nextCard && prevCard) targetCard.pos = prevCard.pos * 2;
+        else if (!nextCard && prevCard) {
+          targetCard.pos = prevCard.pos * 2;
+        }
         // 중간에 있는 카드라면
-        else if (nextCard && prevCard)
+        else if (nextCard && prevCard) {
           targetCard.pos = (prevCard.pos + nextCard.pos) / 2;
+        }
         // 포지션 값을 전달
         this.UPDATE_CARD(targetCard);
       },
