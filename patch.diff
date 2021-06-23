@@ -1,0 +1,27 @@
+From b1d8f5f7ec3a9a3215a8b7f9126f69312d92736b Mon Sep 17 00:00:00 2001
+From: izzzzzzi <noeymaiih@gmail.com>
+Date: Wed, 23 Jun 2021 16:16:58 +0900
+Subject: [PATCH] test
+
+---
+ index.html | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/index.html b/index.html
+index e5a6fd7..4f6d8bb 100644
+--- a/index.html
++++ b/index.html
+@@ -1,8 +1,8 @@
+ <!DOCTYPE html>
+ <html lang="en">
+   <head>
+-    <meta charset="utf-8">
+-    <title>frontend</title>
++    <meta charset="utf-8" />
++    <title>Mastermind</title>
+   </head>
+   <body>
+     <div id="app"></div>
+-- 
+2.31.0
+

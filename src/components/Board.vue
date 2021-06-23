@@ -97,8 +97,8 @@ export default {
 
     // 객체 생성
     this.drakeList = dragula([...this.$el.querySelectorAll(".list-section")], {
+      // 드래그될 아이템(handle) 의 드래그를 막는 invalid 함수
       invalid: handle => {
-        console.log(handle.className);
         return !/^list/.test(handle.className);
       },
       // 리스트 드래그 구현
@@ -143,7 +143,7 @@ export default {
         targetList.pos = (prevList.pos + nextList.pos) / 2;
       this.UPDATE_LIST(targetList);
     });
-    // 같은 리스트 내 카드 드래그 구현
+    // 카드 드래그 구현 : 컨테이너를 배열로 반환해야 함
     this.drake = dragula([...this.$el.querySelectorAll(".card-list")]).on(
       "drop",
       (el, wrapper) => {
@@ -154,7 +154,7 @@ export default {
         };
         let prevCard = null;
         let nextCard = null;
-        // 같은 리스트 내 카드 드랍 구현하기 위해 카드 배열 가져오기
+        // 카드 드랍 구현하기 위해 카드 배열 가져오기
         Array.from(wrapper.querySelectorAll(".card-item")).forEach(
           (el, idx, arr) => {
             // 현재 카드 아이디 값 받아오기
