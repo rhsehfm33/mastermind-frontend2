@@ -15,8 +15,8 @@
       <div class="header-auth">
         <a v-if="isAuthenicated" href="" @click.prevent="logout">Logout</a>
         <template v-else class="header-auth">
-          <router-link to="/login" class="user-nav-btn">Login</router-link>
-          <router-link to="/register" class="user-nav-btn">Sign Up</router-link>
+          <router-link to="/users/login" class="user-nav-btn">Login</router-link>
+          <router-link to="/users/register" class="user-nav-btn">Sign Up</router-link>
         </template>
       </div>
     </v-app-bar>
@@ -76,7 +76,7 @@ export default {
     // 로그아웃
     logout() {
       this.$store.commit("LOGOUT");
-      this.$router.push("/login");
+      this.$router.push("/users/login");
     },
     // 보드 생성
     onClickCreateBoard() {

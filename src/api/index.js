@@ -4,7 +4,7 @@ import router from "../router";
 const domain = "http://localhost:3000";
 const Unauthorized = 401;
 const onUnauthorized = () => {
-  router.push(`/login?returnPath=${encodeURIComponent(location.pathname)}`);
+  router.push(`/users/login?returnPath=${encodeURIComponent(location.pathname)}`);
 };
 
 const request = {
@@ -34,15 +34,15 @@ export const setAuthInHeader = token => {
 // 로그인 & 회원가입 API
 export const auth = {
   login(email, password) {
-    return request.post("/login", { email, password }).then(({ data }) => data);
+    return request.post("/users/login", { email, password }).then(({ data }) => data);
   },
   // 이메일 중복 체크
   check_email(email) {
-    return request.post("/check_email", { email }).then(({ data }) => data);
+    return request.post("/users/check_email", { email }).then(({ data }) => data);
   },
   // 회원 가입
   register(name, email, password) {
-    return request.post("/register", { name, email, password });
+    return request.post("/users/register", { name, email, password });
   },
 };
 // 보드 API

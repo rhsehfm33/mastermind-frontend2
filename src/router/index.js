@@ -15,7 +15,7 @@ Vue.use(VueRouter);
 const requireAuth = () => (from, to, next) => {
   !!store.state.accessToken
     ? next()
-    : next(`/login?returnPath=${encodeURIComponent(from.path)}`);
+    : next(`/users/login?returnPath=${encodeURIComponent(from.path)}`);
 };
 
 // 1. 라우터를 정의하고 import한 라우트 컴포넌트를 각 라우터와 매핑
@@ -23,8 +23,8 @@ const requireAuth = () => (from, to, next) => {
 const routes = [
   // 요청 주소가 바뀔 때마다 beforeEnter 훅 실행
   { path: "/", component: Home, beforeEnter: requireAuth() },
-  { path: "/login", component: Login },
-  { path: "/register", component: Register },
+  { path: "/users/login", component: Login },
+  { path: "/users/register", component: Register },
   {
     path: "/board/:id",
     component: Board,
