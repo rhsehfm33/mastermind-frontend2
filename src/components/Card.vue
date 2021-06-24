@@ -12,9 +12,7 @@
         />
       </div>
       <!-- 보드로 돌아가기 -->
-      <v-btn plain x-large color="blue" @click.prevent="onClickClose"
-        >&times;</v-btn
-      >
+      <v-btn plain x-large color="blue" @click.prevent="$router.go(-1)">&times;</v-btn>
     </div>
     <div slot="body">
       <h3>Description</h3>
@@ -59,10 +57,6 @@ export default {
   },
   methods: {
     ...mapActions(["FETCH_CARD", "UPDATE_CARD"]),
-    // 모달 창 닫으면 보드로 돌아가기
-    onClickClose() {
-      this.$router.push(`/board/${this.boardId}`);
-    },
     // 다른 곳 클릭했을 경우 카드 타이틀 수정
     onBlurTitle() {
       this.toggleTitle = !this.toggleTitle;
