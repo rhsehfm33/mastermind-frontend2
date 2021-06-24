@@ -60,6 +60,7 @@ export default {
     onSubmitNewCard() {
       if (this.invalidInput) return;
       const { inputCardTitle, pos, listId } = this;
+      // ADD_CARD 액션 함수를 실행할 때 card title, list Id 값 전달
       this.ADD_CARD({ title: inputCardTitle, pos, listId }).finally(
         _ => (this.inputCardTitle = ""),
       );

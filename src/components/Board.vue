@@ -94,7 +94,6 @@ export default {
     // destroy() 함수를 통해 불필요한 객체 삭제
     if (this.drakeList) this.drakeList.destroy();
     if (this.drake) this.drake.destroy();
-
     // 객체 생성
     this.drakeList = dragula([...this.$el.querySelectorAll(".list-section")], {
       // 드래그될 아이템(handle) 의 드래그를 막는 invalid 함수
@@ -109,17 +108,18 @@ export default {
       };
       let prevListPos = null;
       let nextListPos = null;
-
       // 리스트 배열 가져오기
       Array.from(wrapper.querySelectorAll(".list")).forEach((el, idx, arr) => {
         const listId = el.dataset.listId;
-        // 찾으려는 리스트가 있다면
+        // 이동하려는 리스트가 맞으면
         if (targetList.id == listId) {
-          prevListPos = idx > 0 ? arr[idx - 1].dataset.listPos * 1 : null;  // 이전 리스트
-          nextListPos = idx < arr.length - 2 ? arr[idx + 1].dataset.listPos * 1 : null; // 다음 리스트
+          // 이전 리스트
+          prevListPos = idx > 0 ? arr[idx - 1].dataset.listPos * 1 : null;
+          // 다음 리스트
+          nextListPos =
+            idx < arr.length - 2 ? arr[idx + 1].dataset.listPos * 1 : null;
         }
       });
-
       // 리스트가 맨 앞에 있으면
       if (!prevListPos && nextListPos) {
         targetList.pos = nextListPos / 2;
@@ -132,15 +132,16 @@ export default {
       else if (prevListPos && nextListPos) {
         targetList.pos = (prevListPos + nextListPos) / 2;
       }
-
       this.UPDATE_LIST(targetList);
     });
     // 카드 드래그 구현 : 컨테이너를 배열로 반환해야 함
     this.drake = dragula([...this.$el.querySelectorAll(".card-list")]).on(
       "drop",
       // el: 드래그하고 있는 요소
-      // target: el이 드래그 후 놓아진 리스트 요소
+      // wrapper: el이 드래그 후 놓아진 리스트 요소
       (el, wrapper) => {
+        // drag & drop 할 때 리스트 내의 카드가 어느 위치에 있는지 확인해야 카드의 포지션 값을 계산할 수 있음
+        // targetCard는 어디로 이동해야할지 정보를 담고 있음
         const targetCard = {
           id: el.dataset.cardId,
           listId: wrapper.dataset.listId,
@@ -148,33 +149,39 @@ export default {
         };
         let prevCardPos = null;
         let nextCardPos = null;
-
         // 카드 드랍 구현하기 위해 카드 배열 가져오기
+        // 유사 배열이므로  Array.from
         Array.from(wrapper.querySelectorAll(".card-item")).forEach(
           (el, idx, arr) => {
             // 현재 카드 아이디 값 받아오기
             const cardId = el.dataset.cardId;
-            // 만약에 카드 아이디가 이동하고자 하는 카드 아이디라면
+            // 만약에 카드 아이디가 이동하고자 하는 카드 아이디라면 앞 뒤의 카드를 계산함
             if (targetCard.id === cardId) {
-              prevCardPos = idx > 0 ? arr[idx - 1].dataset.cardPos * 1 : null; // 이전 카드
-              nextCardPos = idx < arr.length - 1 ? arr[idx + 1].dataset.cardPos * 1 : null; // 다음 카드
+              // prevCard 인덱스 값이 0보다 크면 맨 앞이 아니므로 이전 카드는 arr[인덱스-1]
+              // pos는 dataset의 cardPos를 가져옴
+              prevCardPos = idx > 0 ? arr[idx - 1].dataset.cardPos * 1 : null;
+              // 인덱스 값이 배열의 마지막값보다 작으면 nextCard 있음
+              // 그렇지 않으면 마지막 카드이므로 null 값
+              nextCardPos =
+                idx < arr.length - 1 ? arr[idx + 1].dataset.cardPos * 1 : null;
             }
           },
         );
-
         // 이전 카드가 없고 다음 카드가 있다면 = 맨 앞에 있다면
         if (!prevCardPos && nextCardPos) {
+          // nextCard 위치의 절반값
           targetCard.pos = nextCardPos / 2;
         }
         // 맨 뒤 카드라면
         else if (prevCardPos && !nextCardPos) {
+          // prevCard 위치의 2배
           targetCard.pos = prevCardPos * 2;
         }
         // 중간에 있는 카드라면
         else if (prevCardPos && nextCardPos) {
+          // prevCard 위치와 nextCard 위치를 더해서 절반으로 나눈 값
           targetCard.pos = (prevCardPos + nextCardPos) / 2;
         }
-        
         // 포지션 값을 전달
         this.UPDATE_CARD(targetCard);
       },

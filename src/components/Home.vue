@@ -2,7 +2,7 @@
   <v-main>
     <v-container align="center" justify="center">
       <v-row>
-        <!--  -->
+        <!-- 각각의 보드 조회 -->
         <v-col v-for="(board, i) in boardList" :key="i" cols="4">
           <router-link class="router-link" :to="`/board/${board.id}`">
             <v-card
@@ -10,14 +10,15 @@
               height="150"
               :data-bgcolor="board.bgColor"
             >
-              <v-card-title class="white--text d-flex justify-center">{{
-                board.title
-              }}</v-card-title>
+              <v-card-title class="white--text d-flex justify-center">
+                {{ board.title }}
+              </v-card-title>
             </v-card>
           </router-link>
         </v-col>
         <v-col cols="12" sm="2"> </v-col>
       </v-row>
+      <!-- 보드 생성 -->
       <AddBoard v-if="isAddBoard" />
     </v-container>
   </v-main>
@@ -41,6 +42,7 @@ export default {
     this.SET_THEME();
   },
   updated() {
+    // 보드 테마
     Array.from(document.querySelectorAll(".board-item")).forEach(el => {
       el.style.backgroundColor = el.dataset.bgcolor || "rgb(103,58,181)";
     });

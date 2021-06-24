@@ -15,6 +15,7 @@ const store = new Vuex.Store({
   actions,
 });
 
+// localStorage의 token 정보
 const { accessToken } = localStorage;
 store.commit("LOGIN", { accessToken });
 

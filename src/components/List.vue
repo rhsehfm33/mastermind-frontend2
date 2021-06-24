@@ -28,6 +28,7 @@
     </div>
     <!-- isAddCard 상태가 true일 경우 보여주고 close 이벤트가 오면 false로 변경 -->
     <div v-if="isAddCard">
+      <!-- 카드는 위에서부터 추가되므로 맨 마지막에 있는 카드의 위치를 참고해서 전달해야 포지션 정보가 유니크하게 전달 -->
       <add-card
         :pos="lastCardPos"
         :listId="list.id"
@@ -81,9 +82,7 @@ export default {
       if (!this.inputTitle) return;
       const id = this.list.id;
       const title = this.inputTitle;
-
       if (title === this.list.title) return (this.isEditTitle = false);
-
       this.UPDATE_LIST({ id, title }).then(_ => (this.isEditTitle = false));
     },
     // 리스트 삭제

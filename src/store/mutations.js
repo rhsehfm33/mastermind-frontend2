@@ -1,7 +1,7 @@
 import { setAuthInHeader } from "../api";
 
 const mutations = {
-  // 로그인 : 요청 헤더를 읽어서 할당
+  // 로그인 : request header를 읽어서 할당
   LOGIN(state, { accessToken }) {
     if (!accessToken) return;
     state.accessToken = accessToken;

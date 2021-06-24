@@ -23,8 +23,8 @@
                 color="black"
                 type="submit"
                 :disabled="invalidForm"
-                >Login</v-btn
-              >
+                >Login
+              </v-btn>
             </v-form>
             <!-- 로그인 실패할 경우  -->
             <div class="error-wrapper">
@@ -61,6 +61,7 @@ export default {
   },
   methods: {
     ...mapActions(["LOGIN"]),
+    // 로그인 액션 함수 실행
     onSubmit() {
       this.LOGIN({ email: this.email, password: this.password })
         .then(data => {

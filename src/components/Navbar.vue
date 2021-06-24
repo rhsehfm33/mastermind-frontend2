@@ -2,11 +2,11 @@
   <nav>
     <v-app-bar class="header" elevation="4">
       <v-btn v-if="isNewBoardValid" @click.prevent="onClickCreateBoard"
-        >+ New Board</v-btn
-      >
+        >+ New Board
+      </v-btn>
       <v-btn v-if="isShowMenuValid" @click.prevent="onClickShowMenu"
-        >Show Menu</v-btn
-      >
+        >Show Menu
+      </v-btn>
       <v-spacer></v-spacer>
       <v-toolbar-title class="header-logo"
         ><router-link to="/">{{ appTitle }}</router-link>
@@ -15,8 +15,12 @@
       <div class="header-auth">
         <a v-if="isAuthenicated" href="" @click.prevent="logout">Logout</a>
         <template v-else class="header-auth">
-          <router-link to="/users/login" class="user-nav-btn">Login</router-link>
-          <router-link to="/users/register" class="user-nav-btn">Sign Up</router-link>
+          <router-link to="/users/login" class="user-nav-btn"
+            >Login
+          </router-link>
+          <router-link to="/users/register" class="user-nav-btn"
+            >Sign Up
+          </router-link>
         </template>
       </div>
     </v-app-bar>
@@ -42,12 +46,15 @@ export default {
       navbarColor: "navbarColor",
       bodyColor: "bodyColor",
     }),
+    // 인증 토큰 여부
     isAuthenicated() {
       return this.$store.getters.isAuthenticated;
     },
+    // NEW BOARD 버튼
     isNewBoardValid() {
       return this.rPath === "/" && this.isAuthenicated;
     },
+    // SHOW MENU 버튼
     isShowMenuValid() {
       return this.rPath.includes("/board/") && this.isShowBoardMenu == false;
     },

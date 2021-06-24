@@ -11,7 +11,7 @@ import store from "../store";
 // 0. VueRouter 라이브러리 사용
 Vue.use(VueRouter);
 
-// 인가된 사용자인지 확인
+// 네비게이션 가드 : 인가된 사용자인지 확인
 const requireAuth = () => (from, to, next) => {
   !!store.state.accessToken
     ? next()
@@ -30,6 +30,7 @@ const routes = [
     component: Board,
     // 요청 주소가 바뀔 때마다 beforeEnter 훅 실행
     beforeEnter: requireAuth(),
+    // 중첩 라우팅
     children: [{ path: "card/:cid", component: Card }],
   },
   { path: "*", component: NotFound },

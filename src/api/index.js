@@ -3,6 +3,7 @@ import router from "../router";
 
 const domain = "http://localhost:3000";
 const Unauthorized = 401;
+// 401이면 라우터 객체를 통해 로그인 페이지로 리다이렉트
 const onUnauthorized = () => {
   router.push(
     `/users/login?returnPath=${encodeURIComponent(location.pathname)}`,
@@ -10,23 +11,24 @@ const onUnauthorized = () => {
 };
 
 const request = {
-  // axios.get(url[, config])
+  // axios.get(url[, config]) 형식
   get(path) {
     return axios.get(`${domain + path}`).catch(({ response }) => {
       const { status } = response;
+      // 401 상태
       if (status === Unauthorized) return onUnauthorized();
       throw Error(response);
     });
   },
-  // axios.post(url[, data[, config]])
+  // axios.post(url[, data[, config]]) 형식
   post(path, data) {
     return axios.post(`${domain + path}`, data);
   },
-  // axios.delete(url[, config])
+  // axios.delete(url[, config]) 형식
   delete(path) {
     return axios.delete(`${domain + path}`);
   },
-  // axios.put(url[, data[, config]])
+  // axios.put(url[, data[, config]]) 형식
   put(path, data) {
     return axios.put(`${domain + path}`, data);
   },
