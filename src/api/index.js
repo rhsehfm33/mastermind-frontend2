@@ -1,7 +1,7 @@
 import axios from "axios";
 import router from "../router";
 
-const domain = "http://localhost:3000";
+const domain = `http://${window.location.hostname}:3000`;
 const Unauthorized = 401;
 // 401이면 라우터 객체를 통해 로그인 페이지로 리다이렉트
 const onUnauthorized = () => {
